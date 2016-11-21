@@ -7,15 +7,11 @@ import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class UnigramMapper extends AbstractMapper {
 
-	public UnigramMapper() {
-		this.ngram = NGramMapFactory.getUnigram();
-	}
-
 	@Override
 	public Map<String, Integer> map(String abbreviation, String leftContext, String rightContext) {
 		String prefix = trimAbbreviation(abbreviation);
 
-		Map<String, Integer> subMap = ngram.prefixMap(prefix);
+		Map<String, Integer> subMap = NGramMapFactory.getUnigram().prefixMap(prefix);
 		Map<String, Integer> ret = new TreeMap<>();
 
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {

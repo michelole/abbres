@@ -1,13 +1,9 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
-import at.medunigraz.imi.abbres.model.NGramMap;
-
 public abstract class AbstractMapper implements Mapper {
 
 	private static final String ABBREVIATION_MARKER = ".";
 	private static final String TOKEN_SEPARATOR = " ";
-	
-	protected NGramMap ngram = null;
 
 	/**
 	 * Removes abbreviation out of one string.
