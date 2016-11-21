@@ -1,14 +1,11 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
-import java.io.File;
 import java.util.Map;
 
-import at.medunigraz.imi.abbres.dao.NGramReader;
 import at.medunigraz.imi.abbres.model.NGramMap;
+import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class UnigramMapper extends AbstractMapper {
-
-	private static final String DEFAULT_UNIGRAM_FILE = "unigram.csv";
 
 	protected NGramMap ngram;
 
@@ -17,8 +14,7 @@ public class UnigramMapper extends AbstractMapper {
 	}
 
 	public UnigramMapper() {
-		NGramReader reader = new NGramReader(new File(DEFAULT_UNIGRAM_FILE));
-		this.ngram = new NGramMap(reader.readAll());
+		this.ngram = NGramMapFactory.getUnigram();
 	}
 
 	@Override
