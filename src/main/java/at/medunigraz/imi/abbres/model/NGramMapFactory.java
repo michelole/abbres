@@ -27,4 +27,11 @@ public class NGramMapFactory {
 		return bigramMap;
 	}
 
+	public static void setUnigramMap(NGramMap unigramMap) {
+		NGramMapFactory.unigramMap = unigramMap;
+	}
+
+	public static void setBigramMap(NGramMap bigramMap) {
+		NGramMapFactory.bigramMap = bigramMap;
+	}
 }

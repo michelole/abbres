@@ -3,14 +3,9 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 import java.util.TreeMap;
 
-import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class UnigramMapper extends AbstractMapper {
-
-	public UnigramMapper(NGramMap ngram) {
-		this.ngram = ngram;
-	}
 
 	public UnigramMapper() {
 		this.ngram = NGramMapFactory.getUnigram();

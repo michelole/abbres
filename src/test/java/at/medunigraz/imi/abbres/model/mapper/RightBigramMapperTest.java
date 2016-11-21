@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.model.NGramMap;
+import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import junit.framework.TestCase;
 
 public class RightBigramMapperTest extends TestCase {
@@ -17,7 +18,8 @@ public class RightBigramMapperTest extends TestCase {
 		map.put("Pr and", 10);
 		map.put("Prid. and", 10);
 
-		Mapper mapper = new RightBigramMapper(new NGramMap(map));
+		NGramMapFactory.setBigramMap(new NGramMap(map));
+		Mapper mapper = new RightBigramMapper();
 
 		Map<String, Integer> ngrams = mapper.map("Pr.", "", "and");
 		assertEquals(1, ngrams.size());

@@ -3,14 +3,9 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 import java.util.TreeMap;
 
-import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class RightBigramMapper extends AbstractMapper {
-
-	public RightBigramMapper(NGramMap ngram) {
-		this.ngram = ngram;
-	}
 
 	public RightBigramMapper() {
 		this.ngram = NGramMapFactory.getBigram();
