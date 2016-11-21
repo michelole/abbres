@@ -25,9 +25,12 @@ public class RightBigramMapper extends AbstractMapper {
 
 		Map<String, Integer> subMap = ngram.prefixSuffixMap(prefix, suffix);
 		Map<String, Integer> ret = new TreeMap<>();
-		
+
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			ret.put(leftToken(entry.getKey()), entry.getValue());
+			String expansion = leftToken(entry.getKey());
+			if (isValidExpansion(abbreviation, expansion)) {
+				ret.put(expansion, entry.getValue());
+			}
 		}
 
 		return ret;

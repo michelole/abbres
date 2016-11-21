@@ -15,6 +15,8 @@ public class UnigramMapperTest extends TestCase {
 		map.put("Kill", 1);
 		map.put("Pride", 100);
 		map.put("Prejudice", 100);
+		map.put("Pr", 10);
+		map.put("Prid.", 10);
 
 		Mapper mapper = new UnigramMapper(new NGramMap(map));
 

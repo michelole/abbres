@@ -24,9 +24,12 @@ public class LeftBigramMapper extends AbstractMapper {
 
 		Map<String, Integer> subMap = ngram.prefixMap(prefix);
 		Map<String, Integer> ret = new TreeMap<>();
-		
+
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			ret.put(rightToken(entry.getKey()), entry.getValue());
+			String expansion = rightToken(entry.getKey());
+			if (isValidExpansion(abbreviation, expansion)) {
+				ret.put(expansion, entry.getValue());
+			}
 		}
 
 		return ret;

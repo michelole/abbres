@@ -14,6 +14,8 @@ public class RightBigramMapperTest extends TestCase {
 		map.put("Prejudice is", 1);
 		map.put("is a", 100);
 		map.put("a novel", 100);
+		map.put("Pr and", 10);
+		map.put("Prid. and", 10);
 
 		Mapper mapper = new RightBigramMapper(new NGramMap(map));
 

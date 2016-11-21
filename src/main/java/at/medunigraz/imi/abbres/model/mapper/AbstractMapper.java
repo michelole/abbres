@@ -46,4 +46,24 @@ public abstract class AbstractMapper implements Mapper {
 		return s.substring(s.indexOf(TOKEN_SEPARATOR) + 1, s.length());
 	}
 
+	/**
+	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
+	 * 
+	 * @param abbreviation
+	 * @param expansion
+	 * @return
+	 */
+	protected boolean isValidExpansion(String abbreviation, String expansion) {
+		String trimmedAbbreviation = trimAbbreviation(abbreviation);
+
+		// The expansion must be longer than the abbreviation
+		if (trimmedAbbreviation.length() >= expansion.length())
+			return false;
+
+		// The expansion cannot be another abbreviation
+		if (expansion.endsWith(ABBREVIATION_MARKER))
+			return false;
+
+		return true;
+	}
 }
