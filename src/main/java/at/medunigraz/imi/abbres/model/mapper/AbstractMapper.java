@@ -26,4 +26,24 @@ public abstract class AbstractMapper implements Mapper {
 		return String.join(TOKEN_SEPARATOR, a, b);
 	}
 
+	/**
+	 * Gets the left token of a bigram.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	protected String leftToken(String s) {
+		return s.substring(0, s.indexOf(TOKEN_SEPARATOR));
+	}
+
+	/**
+	 * Gets the right token of a bigram.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	protected String rightToken(String s) {
+		return s.substring(s.indexOf(TOKEN_SEPARATOR) + 1, s.length());
+	}
+
 }

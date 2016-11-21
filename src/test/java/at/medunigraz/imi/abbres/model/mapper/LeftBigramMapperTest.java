@@ -20,7 +20,7 @@ public class LeftBigramMapperTest extends TestCase {
 		Map<String, Integer> ngrams = mapper.map("Pr.", "and", "");
 		assertEquals(1, ngrams.size());
 		
-		assertTrue(ngrams.containsKey("and Prejudice"));
-		assertFalse(ngrams.containsKey("Pride and"));
+		assertTrue(ngrams.containsKey("Prejudice"));
+		assertFalse(ngrams.containsKey("Pride"));
 	}
 }
