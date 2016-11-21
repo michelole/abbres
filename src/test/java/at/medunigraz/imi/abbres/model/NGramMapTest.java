@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import junit.framework.TestCase;
 
-public class NGramListTest extends TestCase {
+public class NGramMapTest extends TestCase {
 	public void testPrefixMap() {
 		Map<String, Integer> map = new TreeMap<>();
 		map.put("To Kill a Mockingbird", 10);
@@ -14,7 +14,7 @@ public class NGramListTest extends TestCase {
 		map.put("To Kill For", 100);
 		map.put("To Kill For Warlock", 100);
 
-		NGramList ngram = new NGramList(map);
+		NGramMap ngram = new NGramMap(map);
 		Map<String, Integer> prefixMap = ngram.prefixMap("To Kill");
 		assertEquals(4, prefixMap.size());
 	}
@@ -27,7 +27,7 @@ public class NGramListTest extends TestCase {
 		map.put("To Kill For", 100);
 		map.put("To Kill For Warlock", 100);
 
-		NGramList ngram = new NGramList(map);
+		NGramMap ngram = new NGramMap(map);
 		Map<String, Integer> prefixMap = ngram.prefixSuffixMap("To Kill", "Warlock");
 		assertEquals(2, prefixMap.size());
 	}

@@ -10,13 +10,13 @@ import java.util.TreeMap;
 import org.apache.commons.collections4.Trie;
 import org.apache.commons.collections4.trie.PatriciaTrie;
 
-public class NGramList implements Serializable {
+public class NGramMap implements Serializable {
 
 	private static final long serialVersionUID = -1896123411638697098L;
 
 	private Trie<String, Integer> trie;
 
-	public NGramList(Map<String, Integer> inputMap) {
+	public NGramMap(Map<String, Integer> inputMap) {
 		this.trie = new PatriciaTrie<>(inputMap);
 	}
 
