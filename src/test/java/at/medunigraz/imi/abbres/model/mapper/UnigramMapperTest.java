@@ -16,7 +16,7 @@ public class UnigramMapperTest extends TestCase {
 		map.put("Pride", 100);
 		map.put("Prejudice", 100);
 
-		UnigramMapper unigramMapper = new UnigramMapper(new NGramMap(map));
+		Mapper unigramMapper = new UnigramMapper(new NGramMap(map));
 
 		Map<String, Integer> unigrams = unigramMapper.map("Pr.", "", "");
 		assertEquals(2, unigrams.size());
