@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 public class UnigramMapperTest extends TestCase {
 
-	public void testUnigramMapper() {
+	public void testMap() {
 		Map<String, Integer> map = new TreeMap<>();
 		map.put("To", 10);
 		map.put("A", 1000);
