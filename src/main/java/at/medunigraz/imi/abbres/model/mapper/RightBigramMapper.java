@@ -8,8 +8,6 @@ import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class RightBigramMapper extends AbstractMapper {
 
-	protected NGramMap ngram;
-
 	public RightBigramMapper(NGramMap ngram) {
 		this.ngram = ngram;
 	}
