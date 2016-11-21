@@ -2,6 +2,8 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 public abstract class AbstractMapper implements Mapper {
 
+	private static final String ABBREVIATION_MARKER = ".";
+
 	/**
 	 * Removes abbreviation out of one string.
 	 * 
@@ -9,7 +11,7 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String trimAbbreviation(String abbreviation) {
-		return abbreviation.substring(0, abbreviation.indexOf("."));
+		return abbreviation.substring(0, abbreviation.indexOf(ABBREVIATION_MARKER));
 	}
 
 }
