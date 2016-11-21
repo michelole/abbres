@@ -19,9 +19,9 @@ public class LeftBigramMapperTest extends TestCase {
 		map.put("and Prej.", 10);
 
 		NGramMapFactory.setBigramMap(new NGramMap(map));
-		Mapper mapper = new LeftBigramMapper();
+		Mapper mapper = new LeftBigramMapper("Pr.", "and");
 
-		Map<String, Integer> ngrams = mapper.map("Pr.", "and", "");
+		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());
 		
 		assertTrue(ngrams.containsKey("Prejudice"));

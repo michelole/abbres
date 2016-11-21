@@ -20,9 +20,9 @@ public class UnigramMapperTest extends TestCase {
 		map.put("Prid.", 10);
 
 		NGramMapFactory.setUnigramMap(new NGramMap(map));
-		Mapper mapper = new UnigramMapper();
+		Mapper mapper = new UnigramMapper("Pr.");
 
-		Map<String, Integer> ngrams = mapper.map("Pr.", "", "");
+		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(2, ngrams.size());
 	}
 }

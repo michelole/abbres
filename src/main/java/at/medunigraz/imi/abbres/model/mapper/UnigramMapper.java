@@ -7,6 +7,10 @@ import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class UnigramMapper extends AbstractMapper {
 
+	public UnigramMapper(String abbreviation) {
+		super(abbreviation, "", "");
+	}
+
 	@Override
 	public Map<String, Integer> map(String abbreviation, String leftContext, String rightContext) {
 		String prefix = trimAbbreviation(abbreviation);

@@ -1,9 +1,21 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
+import java.util.Map;
+
 public abstract class AbstractMapper implements Mapper {
 
 	private static final String ABBREVIATION_MARKER = ".";
 	private static final String TOKEN_SEPARATOR = " ";
+
+	protected Map<String, Integer> candidates = null;
+
+	public AbstractMapper(String abbreviation, String leftContext, String rightContext) {
+		candidates = map(abbreviation, leftContext, rightContext);
+	}
+
+	public Map<String, Integer> getCandidates() {
+		return candidates;
+	}
 
 	/**
 	 * Removes abbreviation out of one string.

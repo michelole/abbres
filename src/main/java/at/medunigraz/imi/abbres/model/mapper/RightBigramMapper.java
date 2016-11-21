@@ -7,6 +7,10 @@ import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
 public class RightBigramMapper extends AbstractMapper {
 
+	public RightBigramMapper(String abbreviation, String rightContext) {
+		super(abbreviation, "", rightContext);
+	}
+
 	@Override
 	public Map<String, Integer> map(String abbreviation, String leftContext, String rightContext) {
 		String prefix = trimAbbreviation(abbreviation);

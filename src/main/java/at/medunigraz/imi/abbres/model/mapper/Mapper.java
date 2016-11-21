@@ -14,4 +14,10 @@ public interface Mapper {
 	 */
 	public Map<String, Integer> map(String abbreviation, String leftContext, String rightContext);
 
+	/**
+	 * Returns a list of candidates expansions and their frequency.
+	 * 
+	 * @return
+	 */
+	public Map<String, Integer> getCandidates();
 }

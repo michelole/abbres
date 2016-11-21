@@ -19,9 +19,9 @@ public class RightBigramMapperTest extends TestCase {
 		map.put("Prid. and", 10);
 
 		NGramMapFactory.setBigramMap(new NGramMap(map));
-		Mapper mapper = new RightBigramMapper();
+		Mapper mapper = new RightBigramMapper("Pr.", "and");
 
-		Map<String, Integer> ngrams = mapper.map("Pr.", "", "and");
+		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());
 		
 		assertTrue(ngrams.containsKey("Pride"));
