@@ -9,12 +9,35 @@ public abstract class AbstractMapper implements Mapper {
 
 	protected Map<String, Integer> candidates = null;
 
+	protected Map.Entry<String, Integer> bestEntry = null;
+
 	public AbstractMapper(String abbreviation, String leftContext, String rightContext) {
 		candidates = map(abbreviation, leftContext, rightContext);
 	}
 
 	public Map<String, Integer> getCandidates() {
 		return candidates;
+	}
+
+	public Map.Entry<String, Integer> getBestEntry() {
+		if (bestEntry == null) {
+			bestEntry = calculateBestEntry();
+		}
+		return bestEntry;
+	}
+
+	private Map.Entry<String, Integer> calculateBestEntry() {
+		Map.Entry<String, Integer> bestEntry = null;
+		int bestCount = 0;
+		for (Map.Entry<String, Integer> entry : getCandidates().entrySet()) {
+			int count = entry.getValue();
+			if (count > bestCount) {
+				bestEntry = entry;
+				bestCount = count;
+			}
+		}
+
+		return bestEntry;
 	}
 
 	/**

@@ -20,4 +20,11 @@ public interface Mapper {
 	 * @return
 	 */
 	public Map<String, Integer> getCandidates();
+
+	/**
+	 * Returns the top entry in the mapper.
+	 * 
+	 * @return
+	 */
+	public Map.Entry<String, Integer> getBestEntry();
 }
