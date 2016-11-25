@@ -82,8 +82,11 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		int lastSeparator = sourceText.lastIndexOf(TOKEN_SEPARATOR, WINDOW_SIZE / 2);
 		String token = sourceText.substring(lastSeparator + 1, WINDOW_SIZE / 2 + 1);
 
-		LeftContext leftContext = new LeftContext(sourceText.substring(0, lastSeparator));
-		RightContext rightContext = new RightContext(sourceText.substring(WINDOW_SIZE / 2 + 1, sourceText.length()));
+		String leftString = sourceText.substring(0, lastSeparator).trim();
+		LeftContext leftContext = new LeftContext(leftString);
+		
+		String rightString = sourceText.substring(WINDOW_SIZE / 2 + 1, sourceText.length()).trim();
+		RightContext rightContext = new RightContext(rightString);
 
 		return new Abbreviation(token).withExpansion(expansion).withLeftContext(leftContext)
 				.withRightContext(rightContext);
