@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.resolver;
 import java.util.Arrays;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
+import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
 import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
@@ -12,6 +13,10 @@ import at.medunigraz.imi.abbres.model.mapper.UnigramMapper;
 import at.medunigraz.imi.abbres.model.reducer.BigramWithFallbackReducer;
 
 public class DefaultResolver implements Resolver {
+
+	public DefaultResolver() {
+		NGramMapFactory.warm();
+	}
 
 	@Override
 	public String resolve(Abbreviation abbreviation) {

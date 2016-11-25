@@ -10,6 +10,11 @@ public class NGramMapFactory {
 
 	private static final String DEFAULT_UNIGRAM_FILE = "src/main/resources/unigram.csv";
 	private static final String DEFAULT_BIGRAM_FILE = "src/main/resources/bigram.csv";
+	
+	public static void warm() {
+		getUnigram();
+		getBigram();
+	}
 
 	public static NGramMap getUnigram() {
 		if (unigramMap == null) {
