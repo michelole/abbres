@@ -47,6 +47,9 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String trimAbbreviation(String abbreviation) {
+		if (!abbreviation.endsWith(ABBREVIATION_MARKER)) {
+			return abbreviation;
+		}
 		return abbreviation.substring(0, abbreviation.indexOf(ABBREVIATION_MARKER));
 	}
 
