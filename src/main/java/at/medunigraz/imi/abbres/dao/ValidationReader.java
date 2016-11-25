@@ -11,19 +11,25 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
+import at.medunigraz.imi.abbres.stats.Evaluator;
 
 public class ValidationReader implements Closeable, Iterator<Abbreviation> {
+	private static final Logger LOG = LoggerFactory.getLogger(Evaluator.class);
+
 	private File file;
 
 	private static final String OUT_OF_SCOPE = "OUT OF SCOPE";
 	private static final char ABBREVIATION_MARK = '.';
 	private static final String DEFAULT_TOKEN_SEPARATOR = " ";
 
-	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");		// This matches a single slash
+	// This matches a single slash
+	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");
 
 	private static final int WINDOW_SIZE = 100;
 
@@ -68,6 +74,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		String expansion = cell.getStringCellValue();
 
 		if (expansion.isEmpty()) {
+			LOG.debug("Empty expansion at row number " + row.getRowNum());
 			return null;
 		}
 
@@ -79,6 +86,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 		// Sanity check
 		if (sourceText.charAt(WINDOW_SIZE / 2) != ABBREVIATION_MARK) {
+			LOG.debug("Sanity check did not pass at row number " + row.getRowNum());
 			return null;
 		}
 
