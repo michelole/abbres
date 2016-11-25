@@ -1,5 +1,6 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
+import java.util.AbstractMap;
 import java.util.Map;
 
 public abstract class AbstractMapper implements Mapper {
@@ -27,7 +28,7 @@ public abstract class AbstractMapper implements Mapper {
 	}
 
 	private Map.Entry<String, Integer> calculateBestEntry() {
-		Map.Entry<String, Integer> bestEntry = null;
+		Map.Entry<String, Integer> bestEntry = new AbstractMap.SimpleEntry<>("", 0);
 		int bestCount = 0;
 		for (Map.Entry<String, Integer> entry : getCandidates().entrySet()) {
 			int count = entry.getValue();
