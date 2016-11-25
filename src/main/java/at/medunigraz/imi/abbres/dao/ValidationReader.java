@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,7 +21,9 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 	private static final String OUT_OF_SCOPE = "OUT OF SCOPE";
 	private static final char ABBREVIATION_MARK = '.';
-	private static final String TOKEN_SEPARATOR = " ";
+	private static final String DEFAULT_TOKEN_SEPARATOR = " ";
+
+	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");		// This matches a single slash
 
 	private static final int WINDOW_SIZE = 100;
 
@@ -79,12 +82,15 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 			return null;
 		}
 
-		int lastSeparator = sourceText.lastIndexOf(TOKEN_SEPARATOR, WINDOW_SIZE / 2);
+		// Changes all non-default token separators to a default one.
+		sourceText = TOKEN_SEPARATOR.matcher(sourceText).replaceAll(DEFAULT_TOKEN_SEPARATOR);
+
+		int lastSeparator = sourceText.lastIndexOf(DEFAULT_TOKEN_SEPARATOR, WINDOW_SIZE / 2);
 		String token = sourceText.substring(lastSeparator + 1, WINDOW_SIZE / 2 + 1);
 
 		String leftString = sourceText.substring(0, lastSeparator).trim();
 		LeftContext leftContext = new LeftContext(leftString);
-		
+
 		String rightString = sourceText.substring(WINDOW_SIZE / 2 + 1, sourceText.length()).trim();
 		RightContext rightContext = new RightContext(rightString);
 
