@@ -11,7 +11,6 @@ import at.medunigraz.imi.abbres.resolver.DefaultResolver;
 import at.medunigraz.imi.abbres.resolver.Resolver;
 
 public class Evaluator {
-
 	private static final Logger LOG = LoggerFactory.getLogger(Evaluator.class);
 
 	private ValidationReader validation;
@@ -44,8 +43,9 @@ public class Evaluator {
 		LOG.debug(String.format("%s\t%s\t%s", "Abbr.", "Gold", "Guess"));
 		while (validation.hasNext()) {
 			Abbreviation gold = validation.next();
-			if (gold == null)
+			if (gold == null) {
 				continue;
+			}
 			Abbreviation guess = gold.clone();
 			guess.withExpansion("");
 			guess.withExpansion(resolver.resolve(guess));
