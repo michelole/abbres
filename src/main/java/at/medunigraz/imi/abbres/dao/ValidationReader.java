@@ -61,7 +61,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		if (cell == null) {
 			return null;
 		}
-		
+
 		String expansion = cell.getStringCellValue();
 
 		if (expansion.isEmpty()) {
@@ -79,7 +79,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 			return null;
 		}
 
-		int lastSeparator = sourceText.lastIndexOf(TOKEN_SEPARATOR);
+		int lastSeparator = sourceText.lastIndexOf(TOKEN_SEPARATOR, WINDOW_SIZE / 2);
 		String token = sourceText.substring(lastSeparator + 1, WINDOW_SIZE / 2);
 
 		LeftContext leftContext = new LeftContext(sourceText.substring(0, lastSeparator));
