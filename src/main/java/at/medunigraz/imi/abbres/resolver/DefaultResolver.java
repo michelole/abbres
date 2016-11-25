@@ -16,7 +16,7 @@ public class DefaultResolver implements Resolver {
 	@Override
 	public String resolve(Abbreviation abbreviation) {
 		Mapper unigram = new UnigramMapper(abbreviation.getToken());
-		Mapper leftBigram = new LeftBigramMapper(abbreviation.getToken(), abbreviation.getLeftContext().getBigram());
+		Mapper leftBigram = new LeftBigramMapper(abbreviation.getToken(), abbreviation.getLeftContext().getUnigram());
 		Mapper rightBigram = new RightBigramMapper(abbreviation.getToken(),
 				abbreviation.getRightContext().getUnigram());
 		return new BigramWithFallbackReducer().reduce(Arrays.asList(unigram, leftBigram, rightBigram));
