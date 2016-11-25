@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -56,7 +57,12 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	public Abbreviation next() {
 		Row row = rowIterator.next();
 
-		String expansion = row.getCell(1).getStringCellValue();
+		Cell cell = row.getCell(1);
+		if (cell == null) {
+			return null;
+		}
+		
+		String expansion = cell.getStringCellValue();
 
 		if (expansion.isEmpty()) {
 			return null;
