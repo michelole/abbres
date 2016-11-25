@@ -23,8 +23,18 @@ public class Abbreviation implements Cloneable {
 		return this;
 	}
 
+	public Abbreviation withLeftContext(String leftContext) {
+		this.leftContext = new LeftContext(leftContext);
+		return this;
+	}
+
 	public Abbreviation withRightContext(RightContext rightContext) {
 		this.rightContext = rightContext;
+		return this;
+	}
+
+	public Abbreviation withRightContext(String rightContext) {
+		this.rightContext = new RightContext(rightContext);
 		return this;
 	}
 
