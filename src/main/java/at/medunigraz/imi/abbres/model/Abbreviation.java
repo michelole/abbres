@@ -5,7 +5,7 @@ import java.util.Objects;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
 
-public class Abbreviation {
+public class Abbreviation implements Cloneable {
 	private String token;
 
 	private LeftContext leftContext;
@@ -64,5 +64,14 @@ public class Abbreviation {
 			return false;
 		Abbreviation other = (Abbreviation) obj;
 		return Objects.equals(token, other.token) && Objects.equals(expansion, other.expansion);
+	}
+
+	@Override
+	public Abbreviation clone() {
+		try {
+			return (Abbreviation) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError();
+		}
 	}
 }
