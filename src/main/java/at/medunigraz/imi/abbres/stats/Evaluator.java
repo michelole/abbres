@@ -19,7 +19,7 @@ public class Evaluator {
 
 	private static final String DEFAULT_VALIDATION = "src/main/resources/validation.xlsx";
 
-	private static final float SIMILARITY_THRESHOLD = 0.85f;
+	private static final float SIMILARITY_THRESHOLD = 0.9f;
 
 	private int correct = 0, total = 0, partial = 0;
 
@@ -62,10 +62,12 @@ public class Evaluator {
 			if (gold.equals(guess)) {
 				correct++;
 			} else {
-				if (similarity > SIMILARITY_THRESHOLD)
+				if (similarity >= SIMILARITY_THRESHOLD) {
 					partial++;
-				LOG.debug(String.format("%s\t%s\t%s\t%4f", guess.getToken(), gold.getExpansion(), guess.getExpansion(),
-						similarity));
+				} else {
+					LOG.debug(String.format("%s\t%s\t%s\t%4f", guess.getToken(), gold.getExpansion(),
+							guess.getExpansion(), similarity));
+				}
 			}
 			total++;
 		}
