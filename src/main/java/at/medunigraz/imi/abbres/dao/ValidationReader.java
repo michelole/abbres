@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -29,6 +30,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");
 
 	private static final int WINDOW_SIZE = 100;
+	private static final int CONTEXT_COLUMN = 0, GOLD_COLUMN = 1, GUESS_COLUMN = 2;
 
 	private XSSFWorkbook workbook;
 
@@ -50,6 +52,31 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		}
 	}
 
+	/**
+	 * Write a guess into the appropriate column of the current row.
+	 * 
+	 * @param guess
+	 */
+	public void writeGuess(String guess) {
+		Cell cell = row.getCell(GUESS_COLUMN);
+		if (cell == null) {
+			cell = row.createCell(GUESS_COLUMN, CellType.STRING);
+		}
+		cell.setCellValue(guess);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getRowNum() {
+		return row.getRowNum();
+	}
+
+	public void writeGuess(Abbreviation abbreviation) {
+		writeGuess(abbreviation.getExpansion());
+	}
+
 	@Override
 	public void close() throws IOException {
 		workbook.close();
@@ -64,7 +91,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	public Abbreviation next() {
 		row = rowIterator.next();
 
-		Cell cell = row.getCell(1);
+		Cell cell = row.getCell(GOLD_COLUMN);
 		if (cell == null) {
 			return null;
 		}
@@ -80,7 +107,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 			return null;
 		}
 
-		String sourceText = row.getCell(0).getStringCellValue();
+		String sourceText = row.getCell(CONTEXT_COLUMN).getStringCellValue();
 
 		// Sanity check
 		if (sourceText.charAt(WINDOW_SIZE / 2) != Constants.ABBREVIATION_MARK) {
