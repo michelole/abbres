@@ -78,8 +78,12 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	}
 
 	@Override
-	public void close() throws IOException {
-		workbook.close();
+	public void close() {
+		try {
+			workbook.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
