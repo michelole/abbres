@@ -2,6 +2,8 @@ package at.medunigraz.imi.abbres.model;
 
 import java.util.Objects;
 
+import org.apache.commons.lang.StringUtils;
+
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
 
@@ -57,6 +59,20 @@ public class Abbreviation implements Cloneable {
 
 	public String getExpansion() {
 		return expansion;
+	}
+
+	/**
+	 * Calculates the similarity of two tokens via levenshteinDistance /
+	 * longestStringLength
+	 * 
+	 * @param other
+	 * @return
+	 */
+	public float tokenSimilarity(Abbreviation other) {
+		int distance = StringUtils.getLevenshteinDistance(this.expansion, other.expansion);
+		int longest = Math.max(this.expansion.length(), other.expansion.length());
+
+		return distance / (float) longest;
 	}
 
 	@Override
