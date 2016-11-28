@@ -19,8 +19,9 @@ public class Evaluator {
 
 	private static final String DEFAULT_VALIDATION = "src/main/resources/validation.xlsx";
 
-	private int correct = 0;
-	private int total = 0;
+	private static final float SIMILARITY_THRESHOLD = 0.85f;
+
+	private int correct = 0, total = 0, partial = 0;
 
 	public Evaluator() {
 		validation = new ValidationReader(new File(DEFAULT_VALIDATION));
@@ -29,6 +30,14 @@ public class Evaluator {
 
 	public double getAccuracy() {
 		return correct / (double) total;
+	}
+
+	public double getPartialAccuracy() {
+		return (correct + partial) / (double) total;
+	}
+
+	public int getPartialTotal() {
+		return correct + partial;
 	}
 
 	public int getCorrect() {
@@ -49,10 +58,14 @@ public class Evaluator {
 			Abbreviation guess = gold.clone();
 			guess.withExpansion("");
 			guess.withExpansion(resolver.resolve(guess));
+			float similarity = gold.tokenSimilarity(guess);
 			if (gold.equals(guess)) {
 				correct++;
 			} else {
-				LOG.debug(String.format("%s\t%s\t%s", guess.getToken(), gold.getExpansion(), guess.getExpansion()));
+				if (similarity > SIMILARITY_THRESHOLD)
+					partial++;
+				LOG.debug(String.format("%s\t%s\t%s\t%4f", guess.getToken(), gold.getExpansion(), guess.getExpansion(),
+						similarity));
 			}
 			total++;
 		}
@@ -62,9 +75,10 @@ public class Evaluator {
 	public static void main(String args[]) {
 		Evaluator e = new Evaluator();
 		e.evaluate();
-		String message = String.format("%d corrects out of %d.%nAccuracy: %.4f", e.getCorrect(), e.getTotal(),
-				e.getAccuracy());
-		System.out.println(message);
+		LOG.info(String.format("Total: %d", e.getTotal()));
+		LOG.info(String.format("Strict matches: %d (%.4f)", e.getCorrect(), e.getAccuracy()));
+		LOG.info(String.format("Partial matches: %d (%.4f) (sim > %.4f)", e.getPartialTotal(), e.getPartialAccuracy(),
+				SIMILARITY_THRESHOLD));
 	}
 
 }
