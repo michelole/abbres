@@ -23,8 +23,6 @@ import at.medunigraz.imi.abbres.stats.Evaluator;
 public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private static final Logger LOG = LoggerFactory.getLogger(Evaluator.class);
 
-	private File file;
-
 	private static final String OUT_OF_SCOPE = "OUT OF SCOPE";
 
 	// This matches a single slash
@@ -36,12 +34,13 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 	private Iterator<Row> rowIterator;
 
+	private Row row = null;
+
 	public ValidationReader(File file) {
-		this.file = file;
-		openSheet();
+		openSheet(file);
 	}
 
-	private void openSheet() {
+	private void openSheet(File file) {
 		try {
 			workbook = new XSSFWorkbook(new FileInputStream(file));
 			XSSFSheet sheet = workbook.getSheetAt(0);
@@ -63,7 +62,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 	@Override
 	public Abbreviation next() {
-		Row row = rowIterator.next();
+		row = rowIterator.next();
 
 		Cell cell = row.getCell(1);
 		if (cell == null) {
@@ -104,4 +103,5 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		return new Abbreviation(token).withExpansion(expansion).withLeftContext(leftContext)
 				.withRightContext(rightContext);
 	}
+
 }
