@@ -6,9 +6,14 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.opencsv.CSVReader;
 
 public class NGramReader {
+	private static final Logger LOG = LoggerFactory.getLogger(NGramReader.class);
+	
 	private File file;
 
 	public NGramReader(File file) {
@@ -21,6 +26,7 @@ public class NGramReader {
 	 * @return
 	 */
 	public Map<String, Integer> readAll() {
+		LOG.info("Loading file " + file.getAbsolutePath());
 		Map<String, Integer> nGramMap = new TreeMap<>();
 
 		try (CSVReader reader = new CSVReader(new FileReader(file), '\t');) {

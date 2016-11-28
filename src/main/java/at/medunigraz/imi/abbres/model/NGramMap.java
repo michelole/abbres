@@ -9,14 +9,18 @@ import java.util.TreeMap;
 
 import org.apache.commons.collections4.Trie;
 import org.apache.commons.collections4.trie.PatriciaTrie;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NGramMap implements Serializable {
+	private static final Logger LOG = LoggerFactory.getLogger(NGramMap.class);
 
 	private static final long serialVersionUID = -1896123411638697098L;
 
 	private Trie<String, Integer> trie;
 
 	public NGramMap(Map<String, Integer> inputMap) {
+		LOG.trace("Loading map into a PatriciaTrie...");
 		this.trie = new PatriciaTrie<>(inputMap);
 	}
 
