@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import at.medunigraz.imi.abbres.Constants;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
@@ -25,8 +26,6 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private File file;
 
 	private static final String OUT_OF_SCOPE = "OUT OF SCOPE";
-	private static final char ABBREVIATION_MARK = '.';
-	private static final String DEFAULT_TOKEN_SEPARATOR = " ";
 
 	// This matches a single slash
 	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");
@@ -85,15 +84,15 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		String sourceText = row.getCell(0).getStringCellValue();
 
 		// Sanity check
-		if (sourceText.charAt(WINDOW_SIZE / 2) != ABBREVIATION_MARK) {
+		if (sourceText.charAt(WINDOW_SIZE / 2) != Constants.ABBREVIATION_MARK) {
 			LOG.debug("Sanity check did not pass at row number " + row.getRowNum());
 			return null;
 		}
 
 		// Changes all non-default token separators to a default one.
-		sourceText = TOKEN_SEPARATOR.matcher(sourceText).replaceAll(DEFAULT_TOKEN_SEPARATOR);
+		sourceText = TOKEN_SEPARATOR.matcher(sourceText).replaceAll(String.valueOf(Constants.DEFAULT_TOKEN_SEPARATOR));
 
-		int lastSeparator = sourceText.lastIndexOf(DEFAULT_TOKEN_SEPARATOR, WINDOW_SIZE / 2);
+		int lastSeparator = sourceText.lastIndexOf(Constants.DEFAULT_TOKEN_SEPARATOR, WINDOW_SIZE / 2);
 		String token = sourceText.substring(lastSeparator + 1, WINDOW_SIZE / 2 + 1);
 
 		String leftString = sourceText.substring(0, lastSeparator).trim();

@@ -3,11 +3,9 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.AbstractMap;
 import java.util.Map;
 
+import at.medunigraz.imi.abbres.Constants;
+
 public abstract class AbstractMapper implements Mapper {
-
-	private static final String ABBREVIATION_MARKER = ".";
-	private static final String TOKEN_SEPARATOR = " ";
-
 	protected Map<String, Integer> candidates = null;
 
 	protected Map.Entry<String, Integer> bestEntry = null;
@@ -48,10 +46,10 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String trimAbbreviation(String abbreviation) {
-		if (!abbreviation.endsWith(ABBREVIATION_MARKER)) {
+		if (!abbreviation.endsWith(String.valueOf(Constants.ABBREVIATION_MARK))) {
 			return abbreviation;
 		}
-		return abbreviation.substring(0, abbreviation.indexOf(ABBREVIATION_MARKER));
+		return abbreviation.substring(0, abbreviation.indexOf(Constants.ABBREVIATION_MARK));
 	}
 
 	/**
@@ -62,7 +60,7 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String concatenate(String a, String b) {
-		return String.join(TOKEN_SEPARATOR, a, b);
+		return String.join(String.valueOf(Constants.DEFAULT_TOKEN_SEPARATOR), a, b);
 	}
 
 	/**
@@ -72,7 +70,7 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String leftToken(String s) {
-		return s.substring(0, s.indexOf(TOKEN_SEPARATOR));
+		return s.substring(0, s.indexOf(Constants.DEFAULT_TOKEN_SEPARATOR));
 	}
 
 	/**
@@ -82,7 +80,7 @@ public abstract class AbstractMapper implements Mapper {
 	 * @return
 	 */
 	protected String rightToken(String s) {
-		return s.substring(s.indexOf(TOKEN_SEPARATOR) + 1, s.length());
+		return s.substring(s.indexOf(Constants.DEFAULT_TOKEN_SEPARATOR) + 1, s.length());
 	}
 
 	/**
@@ -100,7 +98,7 @@ public abstract class AbstractMapper implements Mapper {
 			return false;
 
 		// The expansion cannot be another abbreviation
-		if (expansion.endsWith(ABBREVIATION_MARKER))
+		if (expansion.endsWith(String.valueOf(Constants.ABBREVIATION_MARK)))
 			return false;
 
 		return true;
