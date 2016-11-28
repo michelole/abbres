@@ -72,7 +72,7 @@ public class Abbreviation implements Cloneable {
 		int distance = StringUtils.getLevenshteinDistance(this.expansion, other.expansion);
 		int longest = Math.max(this.expansion.length(), other.expansion.length());
 
-		return distance / (float) longest;
+		return 1 - distance / (float) longest;
 	}
 
 	@Override
