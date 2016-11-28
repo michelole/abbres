@@ -96,9 +96,9 @@ public abstract class AbstractMapper implements Mapper {
 		// The expansion must be longer than the abbreviation
 		if (trimmedAbbreviation.length() >= expansion.length())
 			return false;
-
+		
 		// The expansion cannot be another abbreviation
-		if (expansion.endsWith(String.valueOf(Constants.ABBREVIATION_MARK)))
+		if (expansion.indexOf(Constants.ABBREVIATION_MARK) >= 0)
 			return false;
 
 		return true;
