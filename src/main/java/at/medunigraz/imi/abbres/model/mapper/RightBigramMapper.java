@@ -13,7 +13,7 @@ public class RightBigramMapper extends AbstractMapper {
 	}
 
 	@Override
-	public Map<String, Integer> map(Abbreviation abbreviation) {
+	public Map<String, Integer> map() {
 		String prefix = trimAbbreviation(abbreviation.getToken());
 		String suffix = concatenate("", abbreviation.getRightContext().getUnigram());
 

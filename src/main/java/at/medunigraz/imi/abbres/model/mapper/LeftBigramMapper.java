@@ -13,7 +13,7 @@ public class LeftBigramMapper extends AbstractMapper {
 	}
 
 	@Override
-	public Map<String, Integer> map(Abbreviation abbreviation) {
+	public Map<String, Integer> map() {
 		String prefix = concatenate(abbreviation.getLeftContext().getUnigram(), trimAbbreviation(abbreviation.getToken()));
 
 		Map<String, Integer> subMap = NGramMapFactory.getBigram().prefixMap(prefix);

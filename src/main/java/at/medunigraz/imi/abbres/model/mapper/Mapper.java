@@ -2,8 +2,6 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.Map;
 
-import at.medunigraz.imi.abbres.model.Abbreviation;
-
 public interface Mapper {
 
 	/**
@@ -12,7 +10,7 @@ public interface Mapper {
 	 * @param abbreviation
 	 * @return
 	 */
-	public Map<String, Integer> map(Abbreviation abbreviation);
+	public Map<String, Integer> map();
 
 	/**
 	 * Returns a list of candidates expansions and their frequency.

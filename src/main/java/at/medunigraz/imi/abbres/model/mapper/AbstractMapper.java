@@ -11,7 +11,7 @@ public abstract class AbstractMapper implements Mapper {
 
 	protected Map.Entry<String, Integer> bestEntry = null;
 	
-	private Abbreviation abbreviation = null;
+	protected Abbreviation abbreviation;
 
 	public AbstractMapper(Abbreviation abbreviation) {
 		this.abbreviation = abbreviation;
@@ -19,7 +19,7 @@ public abstract class AbstractMapper implements Mapper {
 
 	public Map<String, Integer> getCandidates() {
 		if (candidates == null) {
-			candidates = map(abbreviation);
+			candidates = map();
 		}
 		return candidates;
 	}

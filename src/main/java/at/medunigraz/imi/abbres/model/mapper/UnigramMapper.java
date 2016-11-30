@@ -13,7 +13,7 @@ public class UnigramMapper extends AbstractMapper {
 	}
 
 	@Override
-	public Map<String, Integer> map(Abbreviation abbreviation) {
+	public Map<String, Integer> map() {
 		String prefix = trimAbbreviation(abbreviation.getToken());
 
 		Map<String, Integer> subMap = NGramMapFactory.getUnigram().prefixMap(prefix);
