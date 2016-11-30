@@ -1,12 +1,11 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
-public class RightBigramMapper extends AbstractMapper {
+public class RightBigramMapper extends StrictMapper {
 
 	public RightBigramMapper(Abbreviation abbreviation) {
 		super(abbreviation);
