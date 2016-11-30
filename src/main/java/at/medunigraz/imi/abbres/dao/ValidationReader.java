@@ -4,7 +4,9 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -24,7 +26,19 @@ import at.medunigraz.imi.abbres.stats.Evaluator;
 public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private static final Logger LOG = LoggerFactory.getLogger(Evaluator.class);
 
-	private static final String OUT_OF_SCOPE = "OUT OF SCOPE";
+	private static final Set<String> OUT_OF_SCOPE = new HashSet<>();
+	static {
+		OUT_OF_SCOPE.add("OUT OF SCOPE");
+		OUT_OF_SCOPE.add("END OF SENTENCE");
+		OUT_OF_SCOPE.add("DIGIT");
+		OUT_OF_SCOPE.add("PUNCTUATIONS");
+		OUT_OF_SCOPE.add("ROMAN NUMBER");
+		OUT_OF_SCOPE.add("ERROR");
+		OUT_OF_SCOPE.add("DATE");
+		OUT_OF_SCOPE.add("DIGIT");
+		OUT_OF_SCOPE.add("DIGIT");
+		OUT_OF_SCOPE.add("DIGIT");
+	}
 
 	// This matches a single slash
 	private static final Pattern TOKEN_SEPARATOR = Pattern.compile("\\\\");
@@ -107,7 +121,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 			return null;
 		}
 
-		if (expansion.equals(OUT_OF_SCOPE)) {
+		if (OUT_OF_SCOPE.contains(expansion)) {
 			return null;
 		}
 
