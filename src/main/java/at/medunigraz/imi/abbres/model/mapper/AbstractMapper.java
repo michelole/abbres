@@ -2,6 +2,7 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.AbstractMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.Constants;
 import at.medunigraz.imi.abbres.model.Abbreviation;
@@ -10,11 +11,29 @@ public abstract class AbstractMapper implements Mapper {
 	protected Map<String, Integer> candidates = null;
 
 	protected Map.Entry<String, Integer> bestEntry = null;
-	
+
 	protected Abbreviation abbreviation;
 
 	public AbstractMapper(Abbreviation abbreviation) {
 		this.abbreviation = abbreviation;
+	}
+
+	@Override
+	public Map<String, Integer> map() {
+		String prefix = prefix();
+		String suffix = suffix();
+
+		Map<String, Integer> subMap = submap(prefix, suffix);
+		Map<String, Integer> ret = new TreeMap<>();
+
+		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
+			String expansion = expansion(entry.getKey());
+			if (isValidExpansion(abbreviation.getToken(), expansion)) {
+				ret.put(expansion, entry.getValue());
+			}
+		}
+
+		return ret;
 	}
 
 	public Map<String, Integer> getCandidates() {
@@ -102,7 +121,7 @@ public abstract class AbstractMapper implements Mapper {
 		// The expansion must be longer than the abbreviation
 		if (trimmedAbbreviation.length() >= expansion.length())
 			return false;
-		
+
 		// The expansion cannot be another abbreviation
 		if (expansion.indexOf(Constants.ABBREVIATION_MARK) >= 0)
 			return false;

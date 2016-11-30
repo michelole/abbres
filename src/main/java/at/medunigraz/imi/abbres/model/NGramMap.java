@@ -46,6 +46,10 @@ public class NGramMap implements Serializable {
 	 * @return
 	 */
 	public Map<String, Integer> prefixSuffixMap(String prefix, String suffix) {
+		if (suffix.isEmpty()) {
+			return prefixMap(prefix);
+		}
+		
 		Map<String, Integer> submap = new TreeMap<>();
 
 		Set<Entry<String, Integer>> entrySet = trie.prefixMap(prefix).entrySet();

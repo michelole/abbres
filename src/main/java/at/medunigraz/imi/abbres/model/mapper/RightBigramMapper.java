@@ -13,21 +13,23 @@ public class RightBigramMapper extends AbstractMapper {
 	}
 
 	@Override
-	public Map<String, Integer> map() {
-		String prefix = trimAbbreviation(abbreviation.getToken());
-		String suffix = concatenate("", abbreviation.getRightContext().getUnigram());
+	public String prefix() {
+		return trimAbbreviation(abbreviation.getToken());
+	}
 
-		Map<String, Integer> subMap = NGramMapFactory.getBigram().prefixSuffixMap(prefix, suffix);
-		Map<String, Integer> ret = new TreeMap<>();
+	@Override
+	public String suffix() {
+		return concatenate("", abbreviation.getRightContext().getUnigram());
+	}
 
-		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			String expansion = leftToken(entry.getKey());
-			if (isValidExpansion(abbreviation.getToken(), expansion)) {
-				ret.put(expansion, entry.getValue());
-			}
-		}
+	@Override
+	public Map<String, Integer> submap(String prefix, String suffix) {
+		return NGramMapFactory.getBigram().prefixSuffixMap(prefix, suffix);
+	}
 
-		return ret;
+	@Override
+	public String expansion(String entryKey) {
+		return leftToken(entryKey);
 	}
 
 }

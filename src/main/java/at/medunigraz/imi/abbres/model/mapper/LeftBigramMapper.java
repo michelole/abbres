@@ -13,20 +13,18 @@ public class LeftBigramMapper extends AbstractMapper {
 	}
 
 	@Override
-	public Map<String, Integer> map() {
-		String prefix = concatenate(abbreviation.getLeftContext().getUnigram(), trimAbbreviation(abbreviation.getToken()));
+	public String prefix() {
+		return concatenate(abbreviation.getLeftContext().getUnigram(), trimAbbreviation(abbreviation.getToken()));
+	}
 
-		Map<String, Integer> subMap = NGramMapFactory.getBigram().prefixMap(prefix);
-		Map<String, Integer> ret = new TreeMap<>();
+	@Override
+	public Map<String, Integer> submap(String prefix, String suffix) {
+		return NGramMapFactory.getBigram().prefixMap(prefix);
+	}
 
-		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			String expansion = rightToken(entry.getKey());
-			if (isValidExpansion(abbreviation.getToken(), expansion)) {
-				ret.put(expansion, entry.getValue());
-			}
-		}
-
-		return ret;
+	@Override
+	public String expansion(String entryKey) {
+		return rightToken(entryKey);
 	}
 
 }
