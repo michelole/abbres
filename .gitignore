@@ -10,3 +10,9 @@ buildNumber.properties
 .classpath
 .project
 .settings
+
+# MacOS stuff
+*.DS_Store
+
+# Excel temporary
+~$*.xls*
