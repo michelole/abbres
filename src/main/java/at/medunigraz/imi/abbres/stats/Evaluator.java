@@ -56,7 +56,11 @@ public class Evaluator {
 				continue;
 			}
 			Abbreviation guess = gold.clone();
+			
+			// Ensure guess is empty both in memory and in file
 			guess.withExpansion("");
+			validation.writeGuess("");
+			
 			guess.withExpansion(resolver.resolve(guess));
 			float similarity = gold.tokenSimilarity(guess);
 			if (gold.equals(guess)) {
@@ -65,13 +69,14 @@ public class Evaluator {
 				if (similarity >= SIMILARITY_THRESHOLD) {
 					partial++;
 				} else {
+					validation.writeGuess(guess);
 					LOG.debug(String.format("%s\t%s\t%s\t%4f", guess.getToken(), gold.getExpansion(),
 							guess.getExpansion(), similarity));
 				}
 			}
 			total++;
 		}
-
+		validation.close();
 	}
 
 	public static void main(String args[]) {

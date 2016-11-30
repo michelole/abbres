@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.dao;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,6 +47,8 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private static final int WINDOW_SIZE = 100;
 	private static final int CONTEXT_COLUMN = 0, GOLD_COLUMN = 1, GUESS_COLUMN = 2;
 
+	private File file;
+
 	private XSSFWorkbook workbook;
 
 	private Iterator<Row> rowIterator;
@@ -53,10 +56,11 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	private Row row = null;
 
 	public ValidationReader(File file) {
-		openSheet(file);
+		this.file = file;
+		openSheet();
 	}
 
-	private void openSheet(File file) {
+	private void openSheet() {
 		try {
 			workbook = new XSSFWorkbook(new FileInputStream(file));
 			XSSFSheet sheet = workbook.getSheetAt(0);
@@ -71,7 +75,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	 * 
 	 * @param guess
 	 */
-	public void writeGuess(String guess) {
+	public void writeGuess(String guess) {		
 		Cell cell = row.getCell(GUESS_COLUMN);
 		if (cell == null) {
 			cell = row.createCell(GUESS_COLUMN, CellType.STRING);
@@ -94,6 +98,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	@Override
 	public void close() {
 		try {
+			workbook.write(new FileOutputStream(file));
 			workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
