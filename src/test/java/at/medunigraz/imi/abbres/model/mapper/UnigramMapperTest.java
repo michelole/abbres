@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 import java.util.TreeMap;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import junit.framework.TestCase;
@@ -18,9 +19,10 @@ public class UnigramMapperTest extends TestCase {
 		map.put("Prejudice", 100);
 		map.put("Pr", 10);
 		map.put("Prid.", 10);
-
 		NGramMapFactory.setUnigramMap(new NGramMap(map));
-		Mapper mapper = new UnigramMapper("Pr.");
+		
+		Abbreviation a = new Abbreviation("Pr.");
+		Mapper mapper = new UnigramMapper(a);
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(2, ngrams.size());

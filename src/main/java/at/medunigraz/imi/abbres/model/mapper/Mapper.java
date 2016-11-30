@@ -2,17 +2,17 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.Map;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
+
 public interface Mapper {
 
 	/**
 	 * Maps an abbreviation into possible candidates.
 	 * 
 	 * @param abbreviation
-	 * @param leftContext
-	 * @param rightContext
 	 * @return
 	 */
-	public Map<String, Integer> map(String abbreviation, String leftContext, String rightContext);
+	public Map<String, Integer> map(Abbreviation abbreviation);
 
 	/**
 	 * Returns a list of candidates expansions and their frequency.

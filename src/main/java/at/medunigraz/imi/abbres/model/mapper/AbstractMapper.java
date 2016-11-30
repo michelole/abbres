@@ -4,17 +4,23 @@ import java.util.AbstractMap;
 import java.util.Map;
 
 import at.medunigraz.imi.abbres.Constants;
+import at.medunigraz.imi.abbres.model.Abbreviation;
 
 public abstract class AbstractMapper implements Mapper {
 	protected Map<String, Integer> candidates = null;
 
 	protected Map.Entry<String, Integer> bestEntry = null;
+	
+	private Abbreviation abbreviation = null;
 
-	public AbstractMapper(String abbreviation, String leftContext, String rightContext) {
-		candidates = map(abbreviation, leftContext, rightContext);
+	public AbstractMapper(Abbreviation abbreviation) {
+		this.abbreviation = abbreviation;
 	}
 
 	public Map<String, Integer> getCandidates() {
+		if (candidates == null) {
+			candidates = map(abbreviation);
+		}
 		return candidates;
 	}
 

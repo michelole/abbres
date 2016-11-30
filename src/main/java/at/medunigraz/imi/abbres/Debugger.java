@@ -31,15 +31,15 @@ public class Debugger {
 			String guess = r.resolve(a);
 			System.out.println("Best guess is: " + guess);
 
-			UnigramMapper unigram = new UnigramMapper(a.getToken());
+			UnigramMapper unigram = new UnigramMapper(a);
 			System.out.println(String.format("Unigram best guess: %s (%d)", unigram.getBestEntry().getKey(),
 					unigram.getBestEntry().getValue()));
 
-			LeftBigramMapper leftBigram = new LeftBigramMapper(a.getToken(), a.getLeftContext().getUnigram());
+			LeftBigramMapper leftBigram = new LeftBigramMapper(a);
 			System.out.println(String.format("Left bigram best guess: %s (%d)", leftBigram.getBestEntry().getKey(),
 					leftBigram.getBestEntry().getValue()));
 
-			RightBigramMapper rightBigram = new RightBigramMapper(a.getToken(), a.getRightContext().getUnigram());
+			RightBigramMapper rightBigram = new RightBigramMapper(a);
 			System.out.println(String.format("Right bigram best guess: %s (%d)", rightBigram.getBestEntry().getKey(),
 					rightBigram.getBestEntry().getValue()));
 

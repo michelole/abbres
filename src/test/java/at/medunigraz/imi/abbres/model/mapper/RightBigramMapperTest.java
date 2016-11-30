@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 import java.util.TreeMap;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import junit.framework.TestCase;
@@ -19,7 +20,9 @@ public class RightBigramMapperTest extends TestCase {
 		map.put("Prid. and", 10);
 
 		NGramMapFactory.setBigramMap(new NGramMap(map));
-		Mapper mapper = new RightBigramMapper("Pr.", "and");
+		
+		Abbreviation a = new Abbreviation("Pr.").withRightContext("and");
+		Mapper mapper = new RightBigramMapper(a);
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());

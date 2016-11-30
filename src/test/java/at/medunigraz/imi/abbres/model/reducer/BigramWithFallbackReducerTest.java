@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
@@ -24,7 +25,8 @@ public class BigramWithFallbackReducerTest extends TestCase {
 		unigramMap.put("Prid.", 10);
 		NGramMapFactory.setUnigramMap(new NGramMap(unigramMap));
 		
-		List<Mapper> mappers = Arrays.asList(new UnigramMapper("Pr."));
+		Abbreviation a = new Abbreviation("Pr.").withLeftContext("and");
+		List<Mapper> mappers = Arrays.asList(new UnigramMapper(a));
 		BigramWithFallbackReducer reducer = new BigramWithFallbackReducer();
 		assertEquals("Pride", reducer.reduce(mappers));
 		
@@ -37,9 +39,9 @@ public class BigramWithFallbackReducerTest extends TestCase {
 		bigramMap.put("a novel", 100);
 		bigramMap.put("and Pr", 10);
 		bigramMap.put("and Prej.", 10);
-
 		NGramMapFactory.setBigramMap(new NGramMap(bigramMap));
-		mappers = Arrays.asList(new UnigramMapper("Pr."), new LeftBigramMapper("Pr.", "and"));
+		
+		mappers = Arrays.asList(new UnigramMapper(a), new LeftBigramMapper(a));
 		assertEquals("Prejudice", reducer.reduce(mappers));	
 	}
 }
