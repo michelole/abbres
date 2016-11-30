@@ -20,8 +20,8 @@ public class NGramMapFactory {
 	private static NGramMap unigramMap = null;
 	private static NGramMap bigramMap = null;
 
-	private static final String DEFAULT_UNIGRAM_FILE = "src/main/resources/unigram.csv";
-	private static final String DEFAULT_BIGRAM_FILE = "src/main/resources/bigram.csv";
+	private static final String DEFAULT_UNIGRAM_FILE = "src/main/resources/unigram.tsv";
+	private static final String DEFAULT_BIGRAM_FILE = "src/main/resources/bigram.tsv";
 
 	private static final String DEFAULT_UNIGRAM_CACHE = "src/main/resources/unigram.ser";
 	private static final String DEFAULT_BIGRAM_CACHE = "src/main/resources/bigram.ser";
