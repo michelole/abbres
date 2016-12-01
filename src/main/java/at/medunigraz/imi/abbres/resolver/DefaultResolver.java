@@ -6,8 +6,8 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
-import at.medunigraz.imi.abbres.model.mapper.RightBigramMapper;
 import at.medunigraz.imi.abbres.model.mapper.UnigramMapper;
+import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
 import at.medunigraz.imi.abbres.model.reducer.BigramWithFallbackReducer;
 
 public class DefaultResolver implements Resolver {
@@ -20,7 +20,7 @@ public class DefaultResolver implements Resolver {
 	public String resolve(Abbreviation abbreviation) {
 		Mapper unigram = new UnigramMapper(abbreviation);
 		Mapper leftBigram = new LeftBigramMapper(abbreviation);
-		Mapper rightBigram = new RightBigramMapper(abbreviation);
+		Mapper rightBigram = new RightBigramMatcher(abbreviation);
 		return new BigramWithFallbackReducer().reduce(Arrays.asList(unigram, leftBigram, rightBigram));
 	}
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
-import at.medunigraz.imi.abbres.model.mapper.RightBigramMapper;
+import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
 
 public class BigramWithFallbackReducer implements Reducer {
 
@@ -19,7 +19,7 @@ public class BigramWithFallbackReducer implements Reducer {
 			String currentNGram = entry.getKey();
 			int countCurrentNGram = entry.getValue();
 			
-			if (mapper instanceof RightBigramMapper || mapper instanceof LeftBigramMapper) {
+			if (mapper instanceof RightBigramMatcher || mapper instanceof LeftBigramMapper) {
 				if (countCurrentNGram > countBestBigram) {
 					bestBigram = currentNGram;
 					countBestBigram = countCurrentNGram;

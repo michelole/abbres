@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
-import at.medunigraz.imi.abbres.model.mapper.RightBigramMapper;
 import at.medunigraz.imi.abbres.model.mapper.UnigramMapper;
+import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
 import at.medunigraz.imi.abbres.resolver.DefaultResolver;
 import at.medunigraz.imi.abbres.resolver.Resolver;
 
@@ -39,7 +39,7 @@ public class Debugger {
 			System.out.println(String.format("Left bigram best guess: %s (%d)", leftBigram.getBestEntry().getKey(),
 					leftBigram.getBestEntry().getValue()));
 
-			RightBigramMapper rightBigram = new RightBigramMapper(a);
+			RightBigramMatcher rightBigram = new RightBigramMatcher(a);
 			System.out.println(String.format("Right bigram best guess: %s (%d)", rightBigram.getBestEntry().getKey(),
 					rightBigram.getBestEntry().getValue()));
 

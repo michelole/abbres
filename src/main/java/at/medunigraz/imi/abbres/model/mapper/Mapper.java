@@ -25,16 +25,4 @@ public interface Mapper {
 	 * @return
 	 */
 	public Map.Entry<String, Integer> getBestEntry();
-
-	public String prefix();
-
-	default public String suffix() {
-		return "";
-	}
-
-	public Map<String, Integer> submap(String prefix, String suffix);
-
-	default public String expansion(String entryKey) {
-		return entryKey;
-	}
 }
