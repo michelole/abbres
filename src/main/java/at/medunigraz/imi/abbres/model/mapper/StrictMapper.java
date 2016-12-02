@@ -3,7 +3,6 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 import java.util.TreeMap;
 
-import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
 public class StrictMapper extends AbstractMapper {
@@ -11,7 +10,7 @@ public class StrictMapper extends AbstractMapper {
 	public StrictMapper(Matcher matcher) {
 		super(matcher);
 	}
-	
+
 	@Override
 	public Map<String, Integer> map() {
 		String prefix = prefix();
@@ -29,7 +28,7 @@ public class StrictMapper extends AbstractMapper {
 
 		return ret;
 	}
-	
+
 	public String prefix() {
 		String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 		return matcher.prefix().concat(trimmedAbbrev);
