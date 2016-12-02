@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import at.medunigraz.imi.abbres.Constants;
+import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
@@ -133,15 +133,15 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		String sourceText = row.getCell(CONTEXT_COLUMN).getStringCellValue();
 
 		// Sanity check
-		if (sourceText.charAt(WINDOW_SIZE / 2) != Constants.ABBREVIATION_MARK) {
+		if (sourceText.charAt(WINDOW_SIZE / 2) != TextUtils.ABBREVIATION_MARK) {
 			LOG.debug("Sanity check did not pass at row number " + row.getRowNum());
 			return null;
 		}
 
 		// Changes all non-default token separators to a default one.
-		sourceText = TOKEN_SEPARATOR.matcher(sourceText).replaceAll(String.valueOf(Constants.DEFAULT_TOKEN_SEPARATOR));
+		sourceText = TOKEN_SEPARATOR.matcher(sourceText).replaceAll(String.valueOf(TextUtils.DEFAULT_TOKEN_SEPARATOR));
 
-		int lastSeparator = sourceText.lastIndexOf(Constants.DEFAULT_TOKEN_SEPARATOR, WINDOW_SIZE / 2);
+		int lastSeparator = sourceText.lastIndexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR, WINDOW_SIZE / 2);
 		String token = sourceText.substring(lastSeparator + 1, WINDOW_SIZE / 2 + 1);
 
 		String leftString = sourceText.substring(0, lastSeparator).trim();

@@ -1,6 +1,6 @@
 package at.medunigraz.imi.abbres.model.matcher;
 
-import at.medunigraz.imi.abbres.Constants;
+import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 
 public abstract class AbstractMatcher implements Matcher {
@@ -13,10 +13,10 @@ public abstract class AbstractMatcher implements Matcher {
 	 * @return
 	 */
 	protected String trimAbbreviation(String abbreviation) {
-		if (!abbreviation.endsWith(String.valueOf(Constants.ABBREVIATION_MARK))) {
+		if (!abbreviation.endsWith(String.valueOf(TextUtils.ABBREVIATION_MARK))) {
 			return abbreviation;
 		}
-		return abbreviation.substring(0, abbreviation.indexOf(Constants.ABBREVIATION_MARK));
+		return abbreviation.substring(0, abbreviation.indexOf(TextUtils.ABBREVIATION_MARK));
 	}
 
 	/**
@@ -27,7 +27,7 @@ public abstract class AbstractMatcher implements Matcher {
 	 * @return
 	 */
 	protected String concatenate(String a, String b) {
-		return String.join(String.valueOf(Constants.DEFAULT_TOKEN_SEPARATOR), a, b);
+		return String.join(String.valueOf(TextUtils.DEFAULT_TOKEN_SEPARATOR), a, b);
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public abstract class AbstractMatcher implements Matcher {
 	 * @return
 	 */
 	protected String leftToken(String s) {
-		return s.substring(0, s.indexOf(Constants.DEFAULT_TOKEN_SEPARATOR));
+		return s.substring(0, s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR));
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public abstract class AbstractMatcher implements Matcher {
 	 * @return
 	 */
 	protected String rightToken(String s) {
-		return s.substring(s.indexOf(Constants.DEFAULT_TOKEN_SEPARATOR) + 1, s.length());
+		return s.substring(s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR) + 1, s.length());
 	}
 	
 	public AbstractMatcher(Abbreviation abbreviation) {
@@ -68,7 +68,7 @@ public abstract class AbstractMatcher implements Matcher {
 			return false;
 
 		// The expansion cannot be another abbreviation
-		if (expansion.indexOf(Constants.ABBREVIATION_MARK) >= 0)
+		if (expansion.indexOf(TextUtils.ABBREVIATION_MARK) >= 0)
 			return false;
 
 		return true;
