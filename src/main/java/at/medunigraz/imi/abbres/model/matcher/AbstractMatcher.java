@@ -6,26 +6,6 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 public abstract class AbstractMatcher implements Matcher {
 	protected Abbreviation abbreviation;
 
-	/**
-	 * Gets the left token of a bigram.
-	 * 
-	 * @param s
-	 * @return
-	 */
-	protected String leftToken(String s) {
-		return s.substring(0, s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR));
-	}
-
-	/**
-	 * Gets the right token of a bigram.
-	 * 
-	 * @param s
-	 * @return
-	 */
-	protected String rightToken(String s) {
-		return s.substring(s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR) + 1, s.length());
-	}
-
 	public AbstractMatcher(Abbreviation abbreviation) {
 		this.abbreviation = abbreviation;
 	}
