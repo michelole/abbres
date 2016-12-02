@@ -2,6 +2,7 @@ package at.medunigraz.imi.abbres.model.matcher;
 
 import java.util.Map;
 
+import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
@@ -18,7 +19,7 @@ public class RightBigramMatcher extends AbstractMatcher {
 
 	@Override
 	public String suffix() {
-		return concatenate("", abbreviation.getRightContext().getUnigram());
+		return TextUtils.concatenate("", abbreviation.getRightContext().getUnigram());
 	}
 
 	@Override

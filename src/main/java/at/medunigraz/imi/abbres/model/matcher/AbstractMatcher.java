@@ -19,16 +19,7 @@ public abstract class AbstractMatcher implements Matcher {
 		return abbreviation.substring(0, abbreviation.indexOf(TextUtils.ABBREVIATION_MARK));
 	}
 
-	/**
-	 * Concatenates two strings using the default token separator.
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 */
-	protected String concatenate(String a, String b) {
-		return String.join(String.valueOf(TextUtils.DEFAULT_TOKEN_SEPARATOR), a, b);
-	}
+
 	
 	/**
 	 * Gets the left token of a bigram.
