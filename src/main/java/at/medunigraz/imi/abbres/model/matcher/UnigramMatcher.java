@@ -1,13 +1,13 @@
-package at.medunigraz.imi.abbres.model.mapper;
+package at.medunigraz.imi.abbres.model.matcher;
 
 import java.util.Map;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 
-public class UnigramMapper extends StrictMapper {
+public class UnigramMatcher extends AbstractMatcher {
 
-	public UnigramMapper(Abbreviation abbreviation) {
+	public UnigramMatcher(Abbreviation abbreviation) {
 		super(abbreviation);
 	}
 

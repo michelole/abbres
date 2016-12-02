@@ -53,4 +53,24 @@ public abstract class AbstractMatcher implements Matcher {
 	public AbstractMatcher(Abbreviation abbreviation) {
 		this.abbreviation = abbreviation;
 	}
+	
+	/**
+	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
+	 * 
+	 * @param expansion
+	 * @return
+	 */
+	public boolean isValidExpansion(String expansion) {
+		String trimmedAbbreviation = trimAbbreviation(abbreviation.getToken());
+
+		// The expansion must be longer than the abbreviation
+		if (trimmedAbbreviation.length() >= expansion.length())
+			return false;
+
+		// The expansion cannot be another abbreviation
+		if (expansion.indexOf(Constants.ABBREVIATION_MARK) >= 0)
+			return false;
+
+		return true;
+	}
 }

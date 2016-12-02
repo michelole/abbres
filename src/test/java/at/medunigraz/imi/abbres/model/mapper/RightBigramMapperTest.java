@@ -23,7 +23,7 @@ public class RightBigramMapperTest extends TestCase {
 		NGramMapFactory.setBigramMap(new NGramMap(map));
 		
 		Abbreviation a = new Abbreviation("Pr.").withRightContext("and");
-		Mapper mapper = new RightBigramMatcher(a);
+		Mapper mapper = new StrictMapper(new RightBigramMatcher(a));
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());

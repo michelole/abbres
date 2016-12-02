@@ -14,5 +14,7 @@ public interface Matcher {
 	default public String expansion(String entryKey) {
 		return entryKey;
 	}
+	
+	public boolean isValidExpansion(String expansion);
 
 }

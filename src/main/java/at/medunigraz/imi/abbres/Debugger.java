@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
-import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
-import at.medunigraz.imi.abbres.model.mapper.UnigramMapper;
+import at.medunigraz.imi.abbres.model.mapper.Mapper;
+import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
+import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
+import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
 import at.medunigraz.imi.abbres.resolver.DefaultResolver;
 import at.medunigraz.imi.abbres.resolver.Resolver;
 
@@ -31,17 +33,17 @@ public class Debugger {
 			String guess = r.resolve(a);
 			System.out.println("Best guess is: " + guess);
 
-			UnigramMapper unigram = new UnigramMapper(a);
-			System.out.println(String.format("Unigram best guess: %s (%d)", unigram.getBestEntry().getKey(),
-					unigram.getBestEntry().getValue()));
+			Mapper strictUnigram = new StrictMapper(new UnigramMatcher(a));
+			System.out.println(String.format("Unigram best guess: %s (%d)", strictUnigram.getBestEntry().getKey(),
+					strictUnigram.getBestEntry().getValue()));
 
-			LeftBigramMapper leftBigram = new LeftBigramMapper(a);
-			System.out.println(String.format("Left bigram best guess: %s (%d)", leftBigram.getBestEntry().getKey(),
-					leftBigram.getBestEntry().getValue()));
+			Mapper strictLeftBigram = new StrictMapper(new LeftBigramMatcher(a));
+			System.out.println(String.format("Left bigram best guess: %s (%d)", strictLeftBigram.getBestEntry().getKey(),
+					strictLeftBigram.getBestEntry().getValue()));
 
-			RightBigramMatcher rightBigram = new RightBigramMatcher(a);
-			System.out.println(String.format("Right bigram best guess: %s (%d)", rightBigram.getBestEntry().getKey(),
-					rightBigram.getBestEntry().getValue()));
+			Mapper strictRightBigram = new StrictMapper(new RightBigramMatcher(a));
+			System.out.println(String.format("Right bigram best guess: %s (%d)", strictRightBigram.getBestEntry().getKey(),
+					strictRightBigram.getBestEntry().getValue()));
 
 		} while (br.readLine() != null);
 	}

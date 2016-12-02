@@ -3,14 +3,13 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.AbstractMap;
 import java.util.Map;
 
-import at.medunigraz.imi.abbres.Constants;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
 public abstract class AbstractMapper implements Mapper {
 	protected Map<String, Integer> candidates = null;
 
 	protected Map.Entry<String, Integer> bestEntry = null;
-	
+
 	protected Matcher matcher;
 
 	public AbstractMapper(Matcher matcher) {
@@ -22,6 +21,10 @@ public abstract class AbstractMapper implements Mapper {
 			candidates = map();
 		}
 		return candidates;
+	}
+	
+	public Matcher getMatcher() {
+		return matcher;
 	}
 
 	public Map.Entry<String, Integer> getBestEntry() {
@@ -45,24 +48,4 @@ public abstract class AbstractMapper implements Mapper {
 		return bestEntry;
 	}
 
-	/**
-	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
-	 * 
-	 * @param abbreviation
-	 * @param expansion
-	 * @return
-	 */
-	protected boolean isValidExpansion(String abbreviation, String expansion) {
-		String trimmedAbbreviation = trimAbbreviation(abbreviation);
-
-		// The expansion must be longer than the abbreviation
-		if (trimmedAbbreviation.length() >= expansion.length())
-			return false;
-
-		// The expansion cannot be another abbreviation
-		if (expansion.indexOf(Constants.ABBREVIATION_MARK) >= 0)
-			return false;
-
-		return true;
-	}
 }

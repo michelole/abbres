@@ -8,9 +8,10 @@ import java.util.TreeMap;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
-import at.medunigraz.imi.abbres.model.mapper.LeftBigramMapper;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
-import at.medunigraz.imi.abbres.model.mapper.UnigramMapper;
+import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
+import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
+import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
 import junit.framework.TestCase;
 
 public class BigramWithFallbackReducerTest extends TestCase {
@@ -26,7 +27,7 @@ public class BigramWithFallbackReducerTest extends TestCase {
 		NGramMapFactory.setUnigramMap(new NGramMap(unigramMap));
 		
 		Abbreviation a = new Abbreviation("Pr.").withLeftContext("and");
-		List<Mapper> mappers = Arrays.asList(new UnigramMapper(a));
+		List<Mapper> mappers = Arrays.asList(new StrictMapper(new UnigramMatcher(a)));
 		BigramWithFallbackReducer reducer = new BigramWithFallbackReducer();
 		assertEquals("Pride", reducer.reduce(mappers));
 		
@@ -41,7 +42,7 @@ public class BigramWithFallbackReducerTest extends TestCase {
 		bigramMap.put("and Prej.", 10);
 		NGramMapFactory.setBigramMap(new NGramMap(bigramMap));
 		
-		mappers = Arrays.asList(new UnigramMapper(a), new LeftBigramMapper(a));
+		mappers = Arrays.asList(new StrictMapper(new UnigramMatcher(a)), new StrictMapper(new LeftBigramMatcher(a)));
 		assertEquals("Prejudice", reducer.reduce(mappers));	
 	}
 }

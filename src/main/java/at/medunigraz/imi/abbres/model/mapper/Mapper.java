@@ -2,6 +2,8 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.Map;
 
+import at.medunigraz.imi.abbres.model.matcher.Matcher;
+
 public interface Mapper {
 
 	/**
@@ -25,4 +27,6 @@ public interface Mapper {
 	 * @return
 	 */
 	public Map.Entry<String, Integer> getBestEntry();
+	
+	public Matcher getMatcher();
 }

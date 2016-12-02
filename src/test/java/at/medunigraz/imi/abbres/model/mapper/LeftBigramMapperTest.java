@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
+import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import junit.framework.TestCase;
 
 public class LeftBigramMapperTest extends TestCase {
@@ -22,7 +23,7 @@ public class LeftBigramMapperTest extends TestCase {
 		NGramMapFactory.setBigramMap(new NGramMap(map));
 		
 		Abbreviation a = new Abbreviation("Pr.").withLeftContext("and");
-		Mapper mapper = new LeftBigramMapper(a);
+		Mapper mapper = new StrictMapper(new LeftBigramMatcher(a));
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());

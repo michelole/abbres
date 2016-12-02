@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
-public abstract class StrictMapper extends AbstractMapper {
+public class StrictMapper extends AbstractMapper {
 
 	public StrictMapper(Matcher matcher) {
 		super(matcher);
@@ -21,7 +21,7 @@ public abstract class StrictMapper extends AbstractMapper {
 
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
 			String expansion = matcher.expansion(entry.getKey());
-			if (isValidExpansion(abbreviation.getToken(), expansion)) {
+			if (matcher.isValidExpansion(expansion)) {
 				ret.put(expansion, entry.getValue());
 			}
 		}
