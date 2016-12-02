@@ -5,22 +5,7 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 
 public abstract class AbstractMatcher implements Matcher {
 	protected Abbreviation abbreviation;
-	
-	/**
-	 * Removes abbreviation out of one string.
-	 * 
-	 * @param abbreviation
-	 * @return
-	 */
-	protected String trimAbbreviation(String abbreviation) {
-		if (!abbreviation.endsWith(String.valueOf(TextUtils.ABBREVIATION_MARK))) {
-			return abbreviation;
-		}
-		return abbreviation.substring(0, abbreviation.indexOf(TextUtils.ABBREVIATION_MARK));
-	}
 
-
-	
 	/**
 	 * Gets the left token of a bigram.
 	 * 
@@ -30,7 +15,7 @@ public abstract class AbstractMatcher implements Matcher {
 	protected String leftToken(String s) {
 		return s.substring(0, s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR));
 	}
-	
+
 	/**
 	 * Gets the right token of a bigram.
 	 * 
@@ -40,11 +25,11 @@ public abstract class AbstractMatcher implements Matcher {
 	protected String rightToken(String s) {
 		return s.substring(s.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR) + 1, s.length());
 	}
-	
+
 	public AbstractMatcher(Abbreviation abbreviation) {
 		this.abbreviation = abbreviation;
 	}
-	
+
 	/**
 	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
 	 * 
@@ -52,10 +37,8 @@ public abstract class AbstractMatcher implements Matcher {
 	 * @return
 	 */
 	public boolean isValidExpansion(String expansion) {
-		String trimmedAbbreviation = trimAbbreviation(abbreviation.getToken());
-
 		// The expansion must be longer than the abbreviation
-		if (trimmedAbbreviation.length() >= expansion.length())
+		if (abbreviation.getTrimmedToken().length() >= expansion.length())
 			return false;
 
 		// The expansion cannot be another abbreviation
@@ -63,5 +46,9 @@ public abstract class AbstractMatcher implements Matcher {
 			return false;
 
 		return true;
+	}
+
+	public Abbreviation getAbbreviation() {
+		return abbreviation;
 	}
 }

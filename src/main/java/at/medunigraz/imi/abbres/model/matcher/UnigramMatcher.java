@@ -12,11 +12,6 @@ public class UnigramMatcher extends AbstractMatcher {
 	}
 
 	@Override
-	public String prefix() {
-		return trimAbbreviation(abbreviation.getToken());
-	}
-
-	@Override
 	public Map<String, Integer> submap(String prefix, String suffix) {
 		return NGramMapFactory.getUnigram().prefixMap(prefix);
 	}

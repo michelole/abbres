@@ -2,8 +2,12 @@ package at.medunigraz.imi.abbres.model.matcher;
 
 import java.util.Map;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
+
 public interface Matcher {
-	public String prefix();
+	default public String prefix() {
+		return "";
+	}
 
 	default public String suffix() {
 		return "";
@@ -14,7 +18,9 @@ public interface Matcher {
 	default public String expansion(String entryKey) {
 		return entryKey;
 	}
-	
+
 	public boolean isValidExpansion(String expansion);
+
+	public Abbreviation getAbbreviation();
 
 }

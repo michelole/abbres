@@ -14,7 +14,7 @@ public class LeftBigramMatcher extends AbstractMatcher {
 
 	@Override
 	public String prefix() {
-		return TextUtils.concatenate(abbreviation.getLeftContext().getUnigram(), trimAbbreviation(abbreviation.getToken()));
+		return TextUtils.concatenate(abbreviation.getLeftContext().getUnigram(), "");
 	}
 
 	@Override

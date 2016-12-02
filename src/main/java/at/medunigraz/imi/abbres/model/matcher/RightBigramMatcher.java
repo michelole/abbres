@@ -13,11 +13,6 @@ public class RightBigramMatcher extends AbstractMatcher {
 	}
 
 	@Override
-	public String prefix() {
-		return trimAbbreviation(abbreviation.getToken());
-	}
-
-	@Override
 	public String suffix() {
 		return TextUtils.concatenate("", abbreviation.getRightContext().getUnigram());
 	}

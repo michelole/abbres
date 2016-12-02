@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.apache.commons.lang.StringUtils;
 
+import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
 
@@ -47,6 +48,13 @@ public class Abbreviation implements Cloneable {
 
 	public String getToken() {
 		return token;
+	}
+
+	public String getTrimmedToken() {
+		if (!token.endsWith(String.valueOf(TextUtils.ABBREVIATION_MARK))) {
+			return token;
+		}
+		return token.substring(0, token.indexOf(TextUtils.ABBREVIATION_MARK));
 	}
 
 	public LeftContext getLeftContext() {
