@@ -16,7 +16,7 @@ import at.medunigraz.imi.abbres.dao.NGramReader;
 
 public class NGramMapFactory {
 	private static transient final Logger LOG = LoggerFactory.getLogger(NGramMap.class);
-	
+
 	private static NGramMap unigramMap = null;
 	private static NGramMap bigramMap = null;
 
@@ -38,7 +38,7 @@ public class NGramMapFactory {
 	private static void deserializeBigram() {
 		bigramMap = deserializeNGram(new File(DEFAULT_BIGRAM_CACHE));
 	}
-	
+
 	private static NGramMap deserializeNGram(File file) {
 		NGramMap ret = null;
 		LOG.trace("Deserializing ngram map from " + file.getName());
@@ -57,7 +57,7 @@ public class NGramMapFactory {
 	private static void serializeBigram() {
 		serializeNGram(bigramMap, new File(DEFAULT_BIGRAM_CACHE));
 	}
-	
+
 	private static void serializeNGram(NGramMap map, File file) {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
 			out.writeObject(map);

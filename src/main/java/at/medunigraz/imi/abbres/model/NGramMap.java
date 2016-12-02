@@ -68,4 +68,8 @@ public class NGramMap implements Serializable {
 
 		return submap;
 	}
+	
+	public boolean isEmpty() {
+		return trie.isEmpty();
+	}
 }
