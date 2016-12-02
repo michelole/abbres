@@ -32,36 +32,35 @@ public class NGramMapFactory {
 	}
 
 	private static void deserializeUnigram() {
-		LOG.trace("Deserializing unigram map from " + DEFAULT_UNIGRAM_CACHE);
-		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DEFAULT_UNIGRAM_CACHE))) {
-			unigramMap = (NGramMap) in.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		unigramMap = deserializeNGram(new File(DEFAULT_UNIGRAM_CACHE));
 	}
 
 	private static void deserializeBigram() {
-		LOG.trace("Deserializing bigram map from " + DEFAULT_BIGRAM_CACHE);
-		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DEFAULT_BIGRAM_CACHE))) {
-			bigramMap = (NGramMap) in.readObject();
+		bigramMap = deserializeNGram(new File(DEFAULT_BIGRAM_CACHE));
+	}
+	
+	private static NGramMap deserializeNGram(File file) {
+		NGramMap ret = null;
+		LOG.trace("Deserializing ngram map from " + file.getName());
+		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+			ret = (NGramMap) in.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return ret;
 	}
 
 	private static void serializeUnigram() {
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DEFAULT_UNIGRAM_CACHE))) {
-			out.writeObject(unigramMap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		serializeNGram(unigramMap, new File(DEFAULT_UNIGRAM_CACHE));
 	}
 
 	private static void serializeBigram() {
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DEFAULT_BIGRAM_CACHE))) {
-			out.writeObject(bigramMap);
+		serializeNGram(bigramMap, new File(DEFAULT_BIGRAM_CACHE));
+	}
+	
+	private static void serializeNGram(NGramMap map, File file) {
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
+			out.writeObject(map);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
