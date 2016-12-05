@@ -49,7 +49,6 @@ public class Evaluator {
 	}
 
 	public void evaluate() {
-		LOG.debug(String.format("%s\t%s\t%s", "Abbr.", "Gold", "Guess"));
 		while (validation.hasNext()) {
 			Abbreviation gold = validation.next();
 			if (gold == null) {

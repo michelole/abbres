@@ -62,6 +62,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 	private void openSheet() {
 		try {
+			LOG.info("Opening sheet " + file.getAbsolutePath());
 			workbook = new XSSFWorkbook(new FileInputStream(file));
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			rowIterator = sheet.iterator();
@@ -141,7 +142,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 		// Sanity check
 		if (sourceText.charAt(WINDOW_SIZE / 2) != TextUtils.ABBREVIATION_MARK) {
-			LOG.debug("Sanity check did not pass at row number " + row.getRowNum());
+			LOG.debug("Unexpected abbreviation marker position at row number " + row.getRowNum());
 			return null;
 		}
 
