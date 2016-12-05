@@ -19,8 +19,6 @@ public interface Matcher extends Comparable<Matcher> {
 		return entryKey;
 	}
 
-	public boolean isValidExpansion(String expansion);
-
 	public Abbreviation getAbbreviation();
 
 }

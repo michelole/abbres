@@ -23,7 +23,7 @@ public class FuzzyMapper extends AbstractMapper {
 			String expansion = matcher.expansion(entry.getKey());
 			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 
-			if (containChars(trimmedAbbrev, expansion) && matcher.isValidExpansion(expansion)) {
+			if (containChars(trimmedAbbrev, expansion) && matcher.getAbbreviation().isValidExpansion(expansion)) {
 				ret.put(expansion, entry.getValue());
 			}
 		}

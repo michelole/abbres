@@ -21,7 +21,7 @@ public class StrictMapper extends AbstractMapper {
 
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
 			String expansion = matcher.expansion(entry.getKey());
-			if (matcher.isValidExpansion(expansion)) {
+			if (matcher.getAbbreviation().isValidExpansion(expansion)) {
 				ret.put(expansion, entry.getValue());
 			}
 		}

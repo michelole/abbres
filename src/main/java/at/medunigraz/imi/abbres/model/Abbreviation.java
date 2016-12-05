@@ -68,6 +68,24 @@ public class Abbreviation implements Cloneable {
 	public String getExpansion() {
 		return expansion;
 	}
+	
+	/**
+	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
+	 * 
+	 * @param expansion
+	 * @return
+	 */
+	public boolean isValidExpansion(String expansion) {
+		// The expansion must be longer than the abbreviation
+		if (this.getTrimmedToken().length() >= expansion.length())
+			return false;
+
+		// The expansion cannot be another abbreviation
+		if (expansion.indexOf(TextUtils.ABBREVIATION_MARK) >= 0)
+			return false;
+
+		return true;
+	}
 
 	/**
 	 * Calculates the similarity of two tokens via levenshteinDistance /
