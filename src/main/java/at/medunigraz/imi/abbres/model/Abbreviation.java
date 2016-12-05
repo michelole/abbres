@@ -11,7 +11,7 @@ import at.medunigraz.imi.abbres.model.context.RightContext;
 
 public class Abbreviation implements Cloneable {
 	private static final Pattern ALLOWED_EXPANSION = Pattern.compile("[\\p{javaLowerCase}\\p{javaUpperCase}]+");
-			
+
 	private String token;
 
 	private LeftContext leftContext;
@@ -80,16 +80,19 @@ public class Abbreviation implements Cloneable {
 	 */
 	public boolean isValidExpansion(String expansion) {
 		// The expansion must be longer than the abbreviation
-		if (this.getTrimmedToken().length() >= expansion.length())
+		if (this.getTrimmedToken().length() >= expansion.length()) {
 			return false;
+		}
 
 		// The expansion cannot be another abbreviation
-		if (expansion.indexOf(TextUtils.ABBREVIATION_MARK) >= 0)
+		if (expansion.indexOf(TextUtils.ABBREVIATION_MARK) >= 0) {
 			return false;
-		
+		}
+
 		// The expansion must match a defined regex (characters only)
-		if (!ALLOWED_EXPANSION.matcher(expansion).matches())
+		if (!ALLOWED_EXPANSION.matcher(expansion).matches()) {
 			return false;
+		}
 
 		return true;
 	}
