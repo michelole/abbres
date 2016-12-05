@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.dao;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,7 +30,7 @@ public class NGramReader {
 		LOG.info("Loading file " + file.getAbsolutePath());
 		Map<String, Integer> nGramMap = new TreeMap<>();
 
-		try (CSVReader reader = new CSVReader(new FileReader(file), '\t');) {
+		try (CSVReader reader = new CSVReader(new FileReader(file), '\t', '\0');) {
 			String[] record;
 			while ((record = reader.readNext()) != null) {
 				if (record.length != 2) {
