@@ -9,7 +9,7 @@ public class AbbreviationTest extends TestCase {
 		assertTrue((new Abbreviation("Tbl.")).isValidExpansion("Tablette"));
 		
 		assertFalse((new Abbreviation("systol.")).isValidExpansion("systol.Funktion"));
-		//assertFalse((new Abbreviation("bds.")).isValidExpansion("bds,"));
+		assertFalse((new Abbreviation("bds.")).isValidExpansion("bds,"));
 	}
 
 }

@@ -1,6 +1,7 @@
 package at.medunigraz.imi.abbres.model;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -9,6 +10,8 @@ import at.medunigraz.imi.abbres.model.context.LeftContext;
 import at.medunigraz.imi.abbres.model.context.RightContext;
 
 public class Abbreviation implements Cloneable {
+	private static final Pattern ALLOWED_EXPANSION = Pattern.compile("[\\p{javaLowerCase}\\p{javaUpperCase}]+");
+			
 	private String token;
 
 	private LeftContext leftContext;
@@ -68,7 +71,7 @@ public class Abbreviation implements Cloneable {
 	public String getExpansion() {
 		return expansion;
 	}
-	
+
 	/**
 	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
 	 * 
@@ -82,6 +85,10 @@ public class Abbreviation implements Cloneable {
 
 		// The expansion cannot be another abbreviation
 		if (expansion.indexOf(TextUtils.ABBREVIATION_MARK) >= 0)
+			return false;
+		
+		// The expansion must match a defined regex (characters only)
+		if (!ALLOWED_EXPANSION.matcher(expansion).matches())
 			return false;
 
 		return true;
