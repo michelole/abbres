@@ -49,24 +49,11 @@ public class Evaluator {
 	}
 
 	public void evaluate() {
-		float minGain = 1f, maxGain = 1f;
 		LOG.debug(String.format("%s\t%s\t%s", "Abbr.", "Gold", "Guess"));
 		while (validation.hasNext()) {
 			Abbreviation gold = validation.next();
 			if (gold == null) {
 				continue;
-			}
-
-			float goldGain = gold.relativeGain(gold.getExpansion());
-			if (goldGain > maxGain) {
-				LOG.debug(String.format("Maximum gain has changed to %.4f at line %d (%s)", goldGain,
-						validation.getRowNum(), gold.getToken()));
-				maxGain = goldGain;
-			}
-			if (goldGain < minGain) {
-				LOG.debug(String.format("Minimum gain has changed to %.4f at line %d (%s)", goldGain,
-						validation.getRowNum(), gold.getToken()));
-				minGain = goldGain;
 			}
 
 			Abbreviation guess = gold.clone();
@@ -88,8 +75,6 @@ public class Evaluator {
 			}
 			total++;
 		}
-
-		LOG.debug(String.format("%.4f < gain < %.4f", minGain, maxGain));
 
 		validation.close();
 	}
