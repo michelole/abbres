@@ -22,6 +22,7 @@ public class NGramMap implements Serializable {
 	public NGramMap(Map<String, Integer> inputMap) {
 		LOG.trace("Loading map into a PatriciaTrie...");
 		this.trie = new PatriciaTrie<>(inputMap);
+		LOG.info("Number of entries: " + this.trie.size());
 	}
 
 	public int get(String key) {

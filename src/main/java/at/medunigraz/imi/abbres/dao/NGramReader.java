@@ -13,7 +13,7 @@ import com.opencsv.CSVReader;
 
 public class NGramReader {
 	private static final Logger LOG = LoggerFactory.getLogger(NGramReader.class);
-	
+
 	private File file;
 
 	public NGramReader(File file) {
@@ -32,8 +32,11 @@ public class NGramReader {
 		try (CSVReader reader = new CSVReader(new FileReader(file), '\t');) {
 			String[] record;
 			while ((record = reader.readNext()) != null) {
-				if (record.length != 2)
+				if (record.length != 2) {
+					LOG.debug(String.format("Unexpected record length (%s) at line %s.", record.length,
+							reader.getLinesRead()));
 					continue;
+				}
 
 				int count = Integer.parseInt(record[0].trim());
 				String ngram = record[1].trim();
