@@ -11,6 +11,8 @@ public abstract class AbstractMapper implements Mapper {
 	protected Map.Entry<String, Integer> bestEntry = null;
 
 	protected Matcher matcher;
+	
+	private static final int MIN_COUNT = 1;
 
 	public AbstractMapper(Matcher matcher) {
 		this.matcher = matcher;
@@ -39,7 +41,7 @@ public abstract class AbstractMapper implements Mapper {
 		int bestCount = 0;
 		for (Map.Entry<String, Integer> entry : getCandidates().entrySet()) {
 			int count = entry.getValue();
-			if (count > bestCount) {
+			if (count > bestCount && count >= MIN_COUNT) {
 				bestEntry = entry;
 				bestCount = count;
 			}
