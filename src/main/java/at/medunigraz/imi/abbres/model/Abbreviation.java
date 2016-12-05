@@ -115,11 +115,11 @@ public class Abbreviation implements Cloneable {
 		return true;
 	}
 	
-	private int absoluteGain(String expansion) {
+	public int absoluteGain(String expansion) {
 		return expansion.length() - this.getTrimmedToken().length();
 	}
 	
-	private float relativeGain(String expansion) {
+	public float relativeGain(String expansion) {
 		int tokenLength = this.getTrimmedToken().length();
 		int expansionLength = expansion.length();
 		

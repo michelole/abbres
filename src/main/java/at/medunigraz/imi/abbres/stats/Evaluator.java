@@ -49,18 +49,32 @@ public class Evaluator {
 	}
 
 	public void evaluate() {
+		float minGain = 1f, maxGain = 1f;
 		LOG.debug(String.format("%s\t%s\t%s", "Abbr.", "Gold", "Guess"));
 		while (validation.hasNext()) {
 			Abbreviation gold = validation.next();
 			if (gold == null) {
 				continue;
 			}
+
+			float goldGain = gold.relativeGain(gold.getExpansion());
+			if (goldGain > maxGain) {
+				LOG.debug(String.format("Maximum gain has changed to %.4f at line %d (%s)", goldGain,
+						validation.getRowNum(), gold.getToken()));
+				maxGain = goldGain;
+			}
+			if (goldGain < minGain) {
+				LOG.debug(String.format("Minimum gain has changed to %.4f at line %d (%s)", goldGain,
+						validation.getRowNum(), gold.getToken()));
+				minGain = goldGain;
+			}
+
 			Abbreviation guess = gold.clone();
-			
+
 			// Ensure guess is empty both in memory and in file
 			guess.withExpansion("");
 			validation.writeGuess("");
-			
+
 			guess.withExpansion(resolver.resolve(guess));
 			float similarity = gold.tokenSimilarity(guess);
 			if (gold.equals(guess)) {
@@ -70,12 +84,13 @@ public class Evaluator {
 					partial++;
 				} else {
 					validation.writeGuess(guess);
-					LOG.debug(String.format("%s\t%s\t%s\t%4f", guess.getToken(), gold.getExpansion(),
-							guess.getExpansion(), similarity));
 				}
 			}
 			total++;
 		}
+
+		LOG.debug(String.format("%.4f < gain < %.4f", minGain, maxGain));
+
 		validation.close();
 	}
 
