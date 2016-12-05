@@ -3,11 +3,16 @@ package at.medunigraz.imi.abbres;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.NavigableSet;
+import java.util.TreeSet;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
+import at.medunigraz.imi.abbres.model.mapper.FuzzyMapper;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
 import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
+import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
 import at.medunigraz.imi.abbres.resolver.DefaultResolver;
@@ -33,17 +38,37 @@ public class Debugger {
 			String guess = r.resolve(a);
 			System.out.println("Best guess is: " + guess);
 
-			Mapper strictUnigram = new StrictMapper(new UnigramMatcher(a));
-			System.out.println(String.format("Unigram best guess: %s (%d)", strictUnigram.getBestEntry().getKey(),
-					strictUnigram.getBestEntry().getValue()));
+			Matcher unigram = new UnigramMatcher(a);
+			Matcher leftBigram = new LeftBigramMatcher(a);
+			Matcher rightBigram = new RightBigramMatcher(a);
 
-			Mapper strictLeftBigram = new StrictMapper(new LeftBigramMatcher(a));
-			System.out.println(String.format("Left bigram best guess: %s (%d)", strictLeftBigram.getBestEntry().getKey(),
-					strictLeftBigram.getBestEntry().getValue()));
+			Mapper strictUnigram = new StrictMapper(unigram);
+			Mapper strictLeftBigram = new StrictMapper(leftBigram);
+			Mapper strictRightBigram = new StrictMapper(rightBigram);
 
-			Mapper strictRightBigram = new StrictMapper(new RightBigramMatcher(a));
-			System.out.println(String.format("Right bigram best guess: %s (%d)", strictRightBigram.getBestEntry().getKey(),
-					strictRightBigram.getBestEntry().getValue()));
+			Mapper fuzzyUnigram = new FuzzyMapper(unigram);
+			Mapper fuzzyLeftBigram = new FuzzyMapper(leftBigram);
+			Mapper fuzzyRightBigram = new FuzzyMapper(rightBigram);
+
+			NavigableSet<Mapper> set = new TreeSet<>();
+			set.add(strictUnigram);
+			set.add(strictLeftBigram);
+			set.add(strictRightBigram);
+			set.add(fuzzyUnigram);
+			set.add(fuzzyLeftBigram);
+			set.add(fuzzyRightBigram);
+
+			for (Iterator<Mapper> iter = set.descendingIterator(); iter.hasNext();) {
+				Mapper mapper = iter.next();
+
+				String mapperClass = mapper.getClass().getSimpleName();
+				String matcherClass = mapper.getMatcher().getClass().getSimpleName();
+				String gram = mapper.getBestEntry().getKey();
+				int frequency = mapper.getBestEntry().getValue();
+				System.out.println(
+						String.format("%s %s best guess: %s (%d)", mapperClass, matcherClass, gram, frequency));
+
+			}
 
 		} while (br.readLine() != null);
 	}
