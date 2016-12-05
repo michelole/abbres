@@ -12,6 +12,9 @@ import at.medunigraz.imi.abbres.model.context.RightContext;
 public class Abbreviation implements Cloneable {
 	private static final Pattern ALLOWED_EXPANSION = Pattern.compile("[\\p{javaLowerCase}\\p{javaUpperCase}]+");
 
+	private static final float MIN_GAIN = 0.001f;
+	private static final float MAX_GAIN = 7.00f;
+
 	private String token;
 
 	private LeftContext leftContext;
@@ -93,8 +96,34 @@ public class Abbreviation implements Cloneable {
 		if (!ALLOWED_EXPANSION.matcher(expansion).matches()) {
 			return false;
 		}
+		
+		// There is no gain on replacing a char with an abbreviation mark...
+		if (absoluteGain(expansion) <= 1) {
+			return false;
+		}
+		
+		// The expansion must provide a minimum information gain
+		if (relativeGain(expansion) < MIN_GAIN) {
+			return false;
+		}
+		
+		// ...but the gain should not be enormous
+		if (relativeGain(expansion) > MAX_GAIN) {
+			return false;
+		}
 
 		return true;
+	}
+	
+	private int absoluteGain(String expansion) {
+		return expansion.length() - this.getTrimmedToken().length();
+	}
+	
+	private float relativeGain(String expansion) {
+		int tokenLength = this.getTrimmedToken().length();
+		int expansionLength = expansion.length();
+		
+		return (expansionLength - tokenLength) / (float) tokenLength;
 	}
 
 	/**
