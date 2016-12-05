@@ -1,6 +1,6 @@
 package at.medunigraz.imi.abbres.model.reducer;
 
-import java.util.List;
+import java.util.NavigableSet;
 
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
 
@@ -13,5 +13,5 @@ public interface Reducer {
 	 * @param mappers
 	 * @return
 	 */
-	public String reduce(List<Mapper> mappers);
+	public String reduce(NavigableSet<Mapper> set);
 }

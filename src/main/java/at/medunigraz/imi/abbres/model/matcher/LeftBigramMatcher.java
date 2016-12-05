@@ -28,4 +28,12 @@ public class LeftBigramMatcher extends AbstractMatcher {
 		return entryKey.substring(entryKey.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR) + 1, entryKey.length());
 	}
 
+	@Override
+	public int compareTo(Matcher o) {
+		if (o instanceof UnigramMatcher) {
+			return +1;
+		}
+		return 0;
+	}
+
 }

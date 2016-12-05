@@ -4,7 +4,7 @@ import java.util.Map;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
-public interface Mapper {
+public interface Mapper extends Comparable<Mapper> {
 
 	/**
 	 * Maps an abbreviation into possible candidates.
@@ -27,6 +27,6 @@ public interface Mapper {
 	 * @return
 	 */
 	public Map.Entry<String, Integer> getBestEntry();
-	
+
 	public Matcher getMatcher();
 }

@@ -28,4 +28,12 @@ public class RightBigramMatcher extends AbstractMatcher {
 		return entryKey.substring(0, entryKey.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR));
 	}
 
+	@Override
+	public int compareTo(Matcher o) {
+		if (o instanceof UnigramMatcher) {
+			return +1;
+		}
+		return 0;
+	}
+
 }

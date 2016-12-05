@@ -22,7 +22,7 @@ public abstract class AbstractMapper implements Mapper {
 		}
 		return candidates;
 	}
-	
+
 	public Matcher getMatcher() {
 		return matcher;
 	}

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 
-public interface Matcher {
+public interface Matcher extends Comparable<Matcher> {
 	default public String prefix() {
 		return "";
 	}

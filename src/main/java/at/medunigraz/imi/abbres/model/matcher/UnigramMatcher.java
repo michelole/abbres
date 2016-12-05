@@ -16,4 +16,12 @@ public class UnigramMatcher extends AbstractMatcher {
 		return NGramMapFactory.getUnigram().prefixMap(prefix);
 	}
 
+	@Override
+	public int compareTo(Matcher o) {
+		if (o instanceof UnigramMatcher) {
+			return 0;
+		}
+		return -1;
+	}
+
 }
