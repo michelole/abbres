@@ -17,6 +17,7 @@ public class AbbreviationTest extends TestCase {
 		// Relative gain limits
 		assertTrue((new Abbreviation("u.")).isValidExpansion("und"));
 		assertFalse((new Abbreviation("re.")).isValidExpansion("rechtsventrikulär"));
+		assertFalse((new Abbreviation("li.")).isValidExpansion("lipidsenkenden"));
 	}
 
 }

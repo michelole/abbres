@@ -13,7 +13,7 @@ public class Abbreviation implements Cloneable {
 	private static final Pattern ALLOWED_EXPANSION = Pattern.compile("[\\p{javaLowerCase}\\p{javaUpperCase}]+");
 
 	private static final float MIN_GAIN = 0.001f;
-	private static final float MAX_GAIN = 7.00f;
+	private static final float MAX_GAIN = 5.99f;
 
 	private String token;
 
