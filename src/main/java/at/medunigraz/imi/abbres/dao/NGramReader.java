@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.dao;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -33,8 +34,8 @@ public class NGramReader {
 			String[] record;
 			while ((record = reader.readNext()) != null) {
 				if (record.length != 2) {
-					LOG.debug(String.format("Unexpected record length (%s) at line %s.", record.length,
-							reader.getLinesRead()));
+					LOG.debug(String.format("Unexpected record length (%s) at line %s: %s", record.length,
+							reader.getLinesRead(), Arrays.toString(record)));
 					continue;
 				}
 
