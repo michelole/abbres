@@ -88,7 +88,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	 * @return
 	 */
 	public int getRowNum() {
-		return row.getRowNum();
+		return row.getRowNum() + 1;
 	}
 
 	public void writeGuess(Abbreviation abbreviation) {
