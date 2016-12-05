@@ -36,9 +36,9 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 		OUT_OF_SCOPE.add("ROMAN NUMBER");
 		OUT_OF_SCOPE.add("ERROR");
 		OUT_OF_SCOPE.add("DATE");
-		OUT_OF_SCOPE.add("DIGIT");
-		OUT_OF_SCOPE.add("DIGIT");
-		OUT_OF_SCOPE.add("DIGIT");
+		OUT_OF_SCOPE.add("SPELLING ERROR");
+		OUT_OF_SCOPE.add("PROPER NAME");
+		OUT_OF_SCOPE.add("LEXICALIZED");
 	}
 
 	// This matches a single slash
@@ -75,7 +75,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 	 * 
 	 * @param guess
 	 */
-	public void writeGuess(String guess) {		
+	public void writeGuess(String guess) {
 		Cell cell = row.getCell(GUESS_COLUMN);
 		if (cell == null) {
 			cell = row.createCell(GUESS_COLUMN, CellType.STRING);
@@ -93,6 +93,13 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 
 	public void writeGuess(Abbreviation abbreviation) {
 		writeGuess(abbreviation.getExpansion());
+	}
+
+	private boolean isOutOfScope(String s) {
+		if (OUT_OF_SCOPE.contains(s)) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -126,7 +133,7 @@ public class ValidationReader implements Closeable, Iterator<Abbreviation> {
 			return null;
 		}
 
-		if (OUT_OF_SCOPE.contains(expansion)) {
+		if (isOutOfScope(expansion)) {
 			return null;
 		}
 
