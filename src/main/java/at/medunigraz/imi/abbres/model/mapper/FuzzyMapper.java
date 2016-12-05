@@ -55,7 +55,12 @@ public class FuzzyMapper extends AbstractMapper {
 	}
 
 	public String prefix() {
-		String firstCharAbbrev = matcher.getAbbreviation().getToken().substring(0, 1);
+		String token = matcher.getAbbreviation().getToken();
+		if (token.isEmpty()) {
+			return "";
+		}
+		
+		String firstCharAbbrev = token.substring(0, 1);
 		return matcher.prefix().concat(firstCharAbbrev);
 	}
 
