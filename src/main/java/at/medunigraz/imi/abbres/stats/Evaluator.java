@@ -19,7 +19,7 @@ public class Evaluator {
 
 	private static final String DEFAULT_VALIDATION = "src/main/resources/validation.xlsx";
 
-	private static final float SIMILARITY_THRESHOLD = 0.9f;
+	private static final float SIMILARITY_THRESHOLD = 0.8f;
 
 	private int correct = 0, total = 0, partial = 0;
 
