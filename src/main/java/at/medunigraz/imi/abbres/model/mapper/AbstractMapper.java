@@ -24,7 +24,7 @@ public abstract class AbstractMapper implements Mapper {
 	}
 
 	public Map<String, Integer> map() {
-		String prefix = prefix();
+		String prefix = prefix(matcher.getAbbreviation());
 		String suffix = matcher.suffix();
 
 		Map<String, Integer> subMap = matcher.submap(prefix, suffix);
@@ -95,15 +95,9 @@ public abstract class AbstractMapper implements Mapper {
 		if (policyDiff != 0) {
 			return policyDiff;
 		}
-		
+
 		int bestEntryDiff = this.getBestEntry().getValue() - o.getBestEntry().getValue();
 		return bestEntryDiff;
-	}
-	
-	@Override
-	public String prefix() {
-		SingleMapper mapper = new SingleMapper(matcher, policy);
-		return mapper.prefix(matcher.getAbbreviation());
 	}
 
 }
