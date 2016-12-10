@@ -18,4 +18,9 @@ public class SingleMapper extends AbstractMapper {
 		return 10;
 	}
 
+	@Override
+	public String suffix(Abbreviation abbreviation) {
+		return matcher.suffix();
+	}
+
 }

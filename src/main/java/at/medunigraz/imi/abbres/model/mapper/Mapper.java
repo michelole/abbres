@@ -35,6 +35,8 @@ public interface Mapper extends Comparable<Mapper> {
 	public Policy getPolicy();
 
 	public String prefix(Abbreviation abbreviation);
+	
+	public String suffix(Abbreviation abbreviation);
 
 	public int getPriority();
 }

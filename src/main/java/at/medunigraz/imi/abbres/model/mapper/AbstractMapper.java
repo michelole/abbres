@@ -25,7 +25,7 @@ public abstract class AbstractMapper implements Mapper {
 
 	public Map<String, Integer> map() {
 		String prefix = prefix(matcher.getAbbreviation());
-		String suffix = matcher.suffix();
+		String suffix = suffix(matcher.getAbbreviation());
 
 		Map<String, Integer> subMap = matcher.submap(prefix, suffix);
 		Map<String, Integer> ret = new TreeMap<>();
