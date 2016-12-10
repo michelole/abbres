@@ -13,4 +13,9 @@ public abstract class AbstractPolicy implements Policy {
 	public Matcher getMatcher() {
 		return matcher;
 	}
+
+	@Override
+	public int compareTo(Policy o) {
+		return this.getPriority() - o.getPriority();
+	}
 }

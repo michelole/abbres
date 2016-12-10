@@ -32,33 +32,8 @@ public class FuzzyPolicy extends AbstractPolicy {
 	}
 
 	@Override
-	public int compareTo(Policy o) {
-		// (1) Strict match with bigrams
-		// (2) Fuzzy match (abc -> a.*b.*c.*) with bigrams
-		// (3) Strict match with unigrams
-		// (4) Fuzzy match (abc -> a.*b.*c.*) with unigrams
-		int matcherComparison = this.getMatcher().compareTo(o.getMatcher());
-		if (o instanceof StrictPolicy) {
-			// Fuzzy Bigram > Strict Unigram
-			if (matcherComparison > 0) {
-				return +1;
-			}
-			// Fuzzy Bigram < Strict Bigram
-			// Fuzzy Unigram < Strict Unigram
-			// Fuzzy Unigram < Strict Bigram
-			return -1;
-		}
-		if (o instanceof FuzzyPolicy) {
-			// Fuzzy Bigram == Fuzzy Bigram
-			// Fuzzy Unigram == Fuzzy Unigram
-//			if (matcherComparison == 0) {
-//				return this.getBestEntry().getValue() > o.getBestEntry().getValue() ? +1 : -1;
-//			}
-			// Fuzzy Unigram < Fuzzy Bigram
-			// Fuzzy Bigram > Fuzzy Unigram
-			return matcherComparison;
-		}
-		return 0;
+	public int getPriority() {
+		return 10;
 	}
 
 }

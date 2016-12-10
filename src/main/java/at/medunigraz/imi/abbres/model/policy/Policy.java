@@ -18,4 +18,6 @@ public interface Policy extends Comparable<Policy> {
 	public String suffix();
 	
 	public Matcher getMatcher();
+	
+	public int getPriority();
 }
