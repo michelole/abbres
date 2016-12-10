@@ -15,7 +15,7 @@ public interface Policy extends Comparable<Policy> {
 	
 	public String prefix(Abbreviation abbreviation);
 	
-	public String suffix();
+	public String suffix(Abbreviation abbreviation);
 	
 	public Matcher getMatcher();
 	
