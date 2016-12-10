@@ -57,10 +57,7 @@ public class Abbreviation implements Cloneable {
 	}
 
 	public String getTrimmedToken() {
-		if (!token.endsWith(String.valueOf(TextUtils.ABBREVIATION_MARK))) {
-			return token;
-		}
-		return token.substring(0, token.indexOf(TextUtils.ABBREVIATION_MARK));
+		return TextUtils.trimAbbreviation(token);
 	}
 
 	public LeftContext getLeftContext() {
