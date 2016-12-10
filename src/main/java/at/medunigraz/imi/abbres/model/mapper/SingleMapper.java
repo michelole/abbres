@@ -1,5 +1,6 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
+import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.policy.Policy;
@@ -11,7 +12,12 @@ public class SingleMapper extends AbstractMapper {
 	}
 
 	public String prefix(Abbreviation abbreviation) {
-		return matcher.prefix().concat(policy.prefix(abbreviation));
+		String matcherPrefix = matcher.prefix();
+		if (!matcherPrefix.isEmpty()) {
+			return TextUtils.concatenate(matcherPrefix, policy.prefix(abbreviation));
+		}
+		
+		return policy.prefix(abbreviation);
 	}
 
 	public int getPriority() {
