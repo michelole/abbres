@@ -2,7 +2,7 @@ package at.medunigraz.imi.abbres.model.reducer;
 
 import java.util.NavigableSet;
 
-import at.medunigraz.imi.abbres.model.policy.Mapper;
+import at.medunigraz.imi.abbres.model.mapper.Mapper;
 
 public interface Reducer {
 

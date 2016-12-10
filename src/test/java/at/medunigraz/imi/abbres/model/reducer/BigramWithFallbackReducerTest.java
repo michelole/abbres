@@ -8,10 +8,10 @@ import java.util.TreeMap;
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
+import at.medunigraz.imi.abbres.model.mapper.Mapper;
+import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
-import at.medunigraz.imi.abbres.model.policy.Mapper;
-import at.medunigraz.imi.abbres.model.policy.StrictMapper;
 import junit.framework.TestCase;
 
 public class BigramWithFallbackReducerTest extends TestCase {

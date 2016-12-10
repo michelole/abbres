@@ -1,4 +1,4 @@
-package at.medunigraz.imi.abbres.model.policy;
+package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,8 +7,6 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
-import at.medunigraz.imi.abbres.model.policy.Mapper;
-import at.medunigraz.imi.abbres.model.policy.StrictMapper;
 import junit.framework.TestCase;
 
 public class UnigramMapperTest extends TestCase {
