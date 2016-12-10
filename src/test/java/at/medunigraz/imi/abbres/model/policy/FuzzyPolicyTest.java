@@ -4,18 +4,18 @@ import junit.framework.TestCase;
 
 public class FuzzyPolicyTest extends TestCase {
 
-	public void testContainsChars() {
+	public void testIsValidExpansion() {
 		Policy policy = new FuzzyPolicy();
 
-		assertTrue(policy.containCharsSameOrder("Tbl", "Tablette"));
-		assertTrue(policy.containCharsSameOrder("Tbl", "Tblzahl"));
-		assertTrue(policy.containCharsSameOrder("Tbl", "Taubal"));
-		assertTrue(policy.containCharsSameOrder("Tbl", "Tbl"));
+		assertTrue(policy.isValidExpansion("Tbl", "Tablette"));
+		assertTrue(policy.isValidExpansion("Tbl", "Tblzahl"));
+		assertTrue(policy.isValidExpansion("Tbl", "Taubal"));
+		assertTrue(policy.isValidExpansion("Tbl", "Tbl"));
 
-		assertTrue(policy.containCharsSameOrder("T", "Table"));
-		assertTrue(policy.containCharsSameOrder("T", "T"));
+		assertTrue(policy.isValidExpansion("T", "Table"));
+		assertTrue(policy.isValidExpansion("T", "T"));
 
-		assertFalse(policy.containCharsSameOrder("Tbl", "Tomato"));
-		assertFalse(policy.containCharsSameOrder("Tbl", "Tb"));
+		assertFalse(policy.isValidExpansion("Tbl", "Tomato"));
+		assertFalse(policy.isValidExpansion("Tbl", "Tb"));
 	}
 }

@@ -5,7 +5,20 @@ import at.medunigraz.imi.abbres.TextUtils;
 public class StrictPolicy extends AbstractPolicy {
 
 	@Override
-	public boolean containCharsSameOrder(String abbreviation, String expansion) {
+	public boolean isValidExpansion(String abbreviation, String expansion) {
+		return isLeftSubstring(abbreviation, expansion);
+	}
+
+	private boolean isLeftSubstring(String abbreviation, String expansion) {
+		if (expansion.length() < abbreviation.length()) {
+			return false;
+		}
+
+		for (int i = 0; i < abbreviation.length(); i++) {
+			if (abbreviation.charAt(i) != expansion.charAt(i)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
