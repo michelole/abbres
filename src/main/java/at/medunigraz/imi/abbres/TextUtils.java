@@ -48,6 +48,6 @@ public final class TextUtils {
 	 * @return
 	 */
 	public static String right(String bigram) {
-		return bigram.substring(bigram.indexOf(DEFAULT_TOKEN_SEPARATOR) + 1, bigram.length());
+		return bigram.substring(bigram.lastIndexOf(DEFAULT_TOKEN_SEPARATOR) + 1, bigram.length());
 	}
 }
