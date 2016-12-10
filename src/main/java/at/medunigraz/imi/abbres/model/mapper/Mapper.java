@@ -28,7 +28,6 @@ public interface Mapper extends Comparable<Mapper> {
 	 */
 	public Map.Entry<String, Integer> getBestEntry();
 
-	@Deprecated
 	public Matcher getMatcher();
 	
 	@Deprecated
