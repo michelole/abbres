@@ -37,6 +37,7 @@ public class FuzzyMapper extends AbstractMapper {
 	 * @param abbreviation
 	 * @param expansion
 	 * @return
+	 * @deprecated
 	 */
 	/* private -> testing */ boolean containChars(String abbreviation, String expansion) {
 		for (int i = 0, j = 0; i < abbreviation.length(); i++, j++) {
@@ -54,6 +55,7 @@ public class FuzzyMapper extends AbstractMapper {
 		return true;
 	}
 
+	@Deprecated
 	public String prefix() {
 		String token = matcher.getAbbreviation().getToken();
 		if (token.isEmpty()) {
