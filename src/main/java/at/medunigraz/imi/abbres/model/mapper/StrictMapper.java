@@ -29,6 +29,7 @@ public class StrictMapper extends AbstractMapper {
 		return ret;
 	}
 
+	@Deprecated
 	public String prefix() {
 		String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 		return matcher.prefix().concat(trimmedAbbrev);

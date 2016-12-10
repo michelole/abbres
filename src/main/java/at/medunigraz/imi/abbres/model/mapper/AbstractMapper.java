@@ -10,6 +10,7 @@ public abstract class AbstractMapper implements Mapper {
 
 	protected Map.Entry<String, Integer> bestEntry = null;
 
+	@Deprecated
 	protected Matcher matcher;
 	
 	private static final int MIN_COUNT = 1;
