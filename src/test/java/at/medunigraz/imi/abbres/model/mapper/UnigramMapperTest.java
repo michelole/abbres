@@ -7,6 +7,7 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
+import at.medunigraz.imi.abbres.model.policy.StrictPolicy;
 import junit.framework.TestCase;
 
 public class UnigramMapperTest extends TestCase {
@@ -23,7 +24,7 @@ public class UnigramMapperTest extends TestCase {
 		NGramMapFactory.setUnigramMap(new NGramMap(map));
 		
 		Abbreviation a = new Abbreviation("Pr.");
-		Mapper mapper = new StrictMapper(new UnigramMatcher(a));
+		Mapper mapper = new SingleMapper(new UnigramMatcher(a), new StrictPolicy());
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(2, ngrams.size());

@@ -7,6 +7,7 @@ import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
+import at.medunigraz.imi.abbres.model.policy.StrictPolicy;
 import junit.framework.TestCase;
 
 public class RightBigramMapperTest extends TestCase {
@@ -23,7 +24,7 @@ public class RightBigramMapperTest extends TestCase {
 		NGramMapFactory.setBigramMap(new NGramMap(map));
 		
 		Abbreviation a = new Abbreviation("Pr.").withRightContext("and");
-		Mapper mapper = new StrictMapper(new RightBigramMatcher(a));
+		Mapper mapper = new SingleMapper(new RightBigramMatcher(a), new StrictPolicy());
 
 		Map<String, Integer> ngrams = mapper.getCandidates();
 		assertEquals(1, ngrams.size());
