@@ -1,8 +1,5 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
 public class FuzzyMapper extends AbstractMapper {
