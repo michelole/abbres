@@ -10,7 +10,6 @@ import at.medunigraz.imi.abbres.model.NGramMap;
 import at.medunigraz.imi.abbres.model.NGramMapFactory;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
 import at.medunigraz.imi.abbres.model.mapper.SingleMapper;
-import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
 import at.medunigraz.imi.abbres.model.policy.StrictPolicy;
