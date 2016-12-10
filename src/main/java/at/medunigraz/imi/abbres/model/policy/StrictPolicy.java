@@ -1,6 +1,6 @@
 package at.medunigraz.imi.abbres.model.policy;
 
-import at.medunigraz.imi.abbres.model.Abbreviation;
+import at.medunigraz.imi.abbres.TextUtils;
 
 public class StrictPolicy extends AbstractPolicy {
 
@@ -10,13 +10,13 @@ public class StrictPolicy extends AbstractPolicy {
 	}
 
 	@Override
-	public String prefix(Abbreviation abbreviation) {
-		return abbreviation.getTrimmedToken();
+	public int getPriority() {
+		return 20;
 	}
 
 	@Override
-	public int getPriority() {
-		return 20;
+	public String strip(String s) {
+		return TextUtils.trimAbbreviation(s);
 	}
 
 }

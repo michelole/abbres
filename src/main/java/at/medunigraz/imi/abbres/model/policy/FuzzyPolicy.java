@@ -1,7 +1,5 @@
 package at.medunigraz.imi.abbres.model.policy;
 
-import at.medunigraz.imi.abbres.model.Abbreviation;
-
 public class FuzzyPolicy extends AbstractPolicy {
 
 	@Override
@@ -22,18 +20,13 @@ public class FuzzyPolicy extends AbstractPolicy {
 	}
 
 	@Override
-	public String prefix(Abbreviation abbreviation) {
-		String token = abbreviation.getToken();
-		if (token.isEmpty()) {
-			return "";
-		}
-
-		return token.substring(0, 1);
+	public int getPriority() {
+		return 10;
 	}
 
 	@Override
-	public int getPriority() {
-		return 10;
+	public String strip(String s) {
+		return s.substring(0, 1);
 	}
 
 }

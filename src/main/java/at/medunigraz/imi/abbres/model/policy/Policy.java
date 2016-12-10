@@ -17,4 +17,6 @@ public interface Policy extends Comparable<Policy> {
 	public String suffix(Abbreviation abbreviation);
 	
 	public int getPriority();
+	
+	public String strip(String s);
 }
