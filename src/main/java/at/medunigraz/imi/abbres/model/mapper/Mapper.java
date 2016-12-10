@@ -3,6 +3,7 @@ package at.medunigraz.imi.abbres.model.mapper;
 import java.util.Map;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
+import at.medunigraz.imi.abbres.model.policy.Policy;
 
 public interface Mapper extends Comparable<Mapper> {
 
@@ -29,6 +30,8 @@ public interface Mapper extends Comparable<Mapper> {
 	public Map.Entry<String, Integer> getBestEntry();
 
 	public Matcher getMatcher();
+	
+	public Policy getPolicy();
 	
 	@Deprecated
 	public String prefix();

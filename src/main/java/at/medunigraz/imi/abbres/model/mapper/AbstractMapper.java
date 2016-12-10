@@ -13,16 +13,16 @@ public abstract class AbstractMapper implements Mapper {
 	protected Map.Entry<String, Integer> bestEntry = null;
 
 	protected Matcher matcher;
-	
+
 	protected Policy policy;
-	
+
 	private static final int MIN_COUNT = 1;
 
 	public AbstractMapper(Matcher matcher, Policy policy) {
 		this.matcher = matcher;
 		this.policy = policy;
 	}
-	
+
 	public Map<String, Integer> map() {
 		String prefix = prefix();
 		String suffix = matcher.suffix();
@@ -34,7 +34,8 @@ public abstract class AbstractMapper implements Mapper {
 			String expansion = matcher.expansion(entry.getKey());
 			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 
-			if (policy.containChars(trimmedAbbrev, expansion) && matcher.getAbbreviation().isValidExpansion(expansion)) {
+			if (policy.containChars(trimmedAbbrev, expansion)
+					&& matcher.getAbbreviation().isValidExpansion(expansion)) {
 				ret.put(expansion, entry.getValue());
 			}
 		}
@@ -51,6 +52,10 @@ public abstract class AbstractMapper implements Mapper {
 
 	public Matcher getMatcher() {
 		return matcher;
+	}
+
+	public Policy getPolicy() {
+		return policy;
 	}
 
 	public Map.Entry<String, Integer> getBestEntry() {
@@ -73,10 +78,26 @@ public abstract class AbstractMapper implements Mapper {
 
 		return bestEntry;
 	}
-	
+
 	@Override
 	public int compareTo(Mapper o) {
-		return this.getPriority() - o.getPriority();
+		int mapperDiff = this.getPriority() - o.getPriority();
+		if (mapperDiff != 0) {
+			return mapperDiff;
+		}
+
+		int matcherDiff = this.getMatcher().compareTo(o.getMatcher());
+		if (matcherDiff != 0) {
+			return matcherDiff;
+		}
+
+		int policyDiff = this.getPolicy().compareTo(o.getPolicy());
+		if (policyDiff != 0) {
+			return policyDiff;
+		}
+		
+		int bestEntryDiff = this.getBestEntry().getValue() - o.getBestEntry().getValue();
+		return bestEntryDiff;
 	}
 
 }
