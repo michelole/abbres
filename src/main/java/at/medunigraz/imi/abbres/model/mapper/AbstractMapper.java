@@ -73,5 +73,10 @@ public abstract class AbstractMapper implements Mapper {
 
 		return bestEntry;
 	}
+	
+	@Override
+	public int compareTo(Mapper o) {
+		return this.getPriority() - o.getPriority();
+	}
 
 }

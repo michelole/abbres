@@ -32,4 +32,6 @@ public interface Mapper extends Comparable<Mapper> {
 	
 	@Deprecated
 	public String prefix();
+	
+	public int getPriority();
 }
