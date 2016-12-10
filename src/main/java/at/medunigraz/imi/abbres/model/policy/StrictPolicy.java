@@ -1,5 +1,7 @@
 package at.medunigraz.imi.abbres.model.policy;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
+
 public class StrictPolicy extends AbstractPolicy {
 
 	@Override
@@ -38,9 +40,8 @@ public class StrictPolicy extends AbstractPolicy {
 	}
 
 	@Override
-	public String prefix() {
-		String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
-		return matcher.prefix().concat(trimmedAbbrev);
+	public String prefix(Abbreviation abbreviation) {
+		return abbreviation.getTrimmedToken();
 	}
 
 }
