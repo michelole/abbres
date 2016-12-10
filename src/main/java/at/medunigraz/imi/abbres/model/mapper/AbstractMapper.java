@@ -99,5 +99,11 @@ public abstract class AbstractMapper implements Mapper {
 		int bestEntryDiff = this.getBestEntry().getValue() - o.getBestEntry().getValue();
 		return bestEntryDiff;
 	}
+	
+	@Override
+	public String prefix() {
+		SingleMapper mapper = new SingleMapper(matcher, policy);
+		return mapper.prefix(matcher.getAbbreviation());
+	}
 
 }

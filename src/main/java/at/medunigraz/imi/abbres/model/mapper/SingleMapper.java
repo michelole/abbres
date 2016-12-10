@@ -10,11 +10,6 @@ public class SingleMapper extends AbstractMapper {
 		super(matcher, policy);
 	}
 
-	@Override
-	public String prefix() {
-		return prefix(matcher.getAbbreviation());
-	}
-
 	public String prefix(Abbreviation abbreviation) {
 		return matcher.prefix().concat(policy.prefix(abbreviation));
 	}
