@@ -19,9 +19,4 @@ public class StrictPolicy extends AbstractPolicy {
 		return matcher.prefix().concat(trimmedAbbrev);
 	}
 
-	@Override
-	public String suffix() {
-		return matcher.suffix();
-	}
-
 }
