@@ -7,15 +7,15 @@ public class FuzzyPolicyTest extends TestCase {
 	public void testContainsChars() {
 		Policy policy = new FuzzyPolicy();
 
-		assertTrue(policy.containChars("Tbl", "Tablette"));
-		assertTrue(policy.containChars("Tbl", "Tblzahl"));
-		assertTrue(policy.containChars("Tbl", "Taubal"));
-		assertTrue(policy.containChars("Tbl", "Tbl"));
+		assertTrue(policy.containCharsSameOrder("Tbl", "Tablette"));
+		assertTrue(policy.containCharsSameOrder("Tbl", "Tblzahl"));
+		assertTrue(policy.containCharsSameOrder("Tbl", "Taubal"));
+		assertTrue(policy.containCharsSameOrder("Tbl", "Tbl"));
 
-		assertTrue(policy.containChars("T", "Table"));
-		assertTrue(policy.containChars("T", "T"));
+		assertTrue(policy.containCharsSameOrder("T", "Table"));
+		assertTrue(policy.containCharsSameOrder("T", "T"));
 
-		assertFalse(policy.containChars("Tbl", "Tomato"));
-		assertFalse(policy.containChars("Tbl", "Tb"));
+		assertFalse(policy.containCharsSameOrder("Tbl", "Tomato"));
+		assertFalse(policy.containCharsSameOrder("Tbl", "Tb"));
 	}
 }

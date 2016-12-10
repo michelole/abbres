@@ -34,7 +34,7 @@ public abstract class AbstractMapper implements Mapper {
 			String expansion = matcher.expansion(entry.getKey());
 			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 
-			if (!policy.containChars(trimmedAbbrev, expansion)) {
+			if (!policy.containCharsSameOrder(trimmedAbbrev, expansion)) {
 				continue;
 			}
 

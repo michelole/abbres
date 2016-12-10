@@ -10,7 +10,7 @@ public interface Policy extends Comparable<Policy> {
 	 * @param expansion
 	 * @return
 	 */
-	public boolean containChars(String abbreviation, String expansion);
+	public boolean containCharsSameOrder(String abbreviation, String expansion);
 	
 	public String prefix(Abbreviation abbreviation);
 	

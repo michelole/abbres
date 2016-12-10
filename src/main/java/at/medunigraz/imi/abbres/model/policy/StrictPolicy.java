@@ -5,7 +5,7 @@ import at.medunigraz.imi.abbres.TextUtils;
 public class StrictPolicy extends AbstractPolicy {
 
 	@Override
-	public boolean containChars(String abbreviation, String expansion) {
+	public boolean containCharsSameOrder(String abbreviation, String expansion) {
 		return true;
 	}
 
