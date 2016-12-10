@@ -23,5 +23,10 @@ public class UnigramMatcher extends AbstractMatcher {
 		}
 		return -1;
 	}
+	
+	@Override
+	public String expansion(String entryKey) {
+		return entryKey;
+	}
 
 }

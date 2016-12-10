@@ -15,9 +15,7 @@ public interface Matcher extends Comparable<Matcher> {
 
 	public Map<String, Integer> submap(String prefix, String suffix);
 
-	default public String expansion(String entryKey) {
-		return entryKey;
-	}
+	public String expansion(String entryKey);
 
 	public Abbreviation getAbbreviation();
 
