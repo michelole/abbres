@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
 
-import at.medunigraz.imi.abbres.model.mapper.Mapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
+import at.medunigraz.imi.abbres.model.policy.Mapper;
 
 public class BigramWithFallbackReducer implements Reducer {
 

@@ -8,13 +8,13 @@ import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
-import at.medunigraz.imi.abbres.model.mapper.FuzzyMapper;
-import at.medunigraz.imi.abbres.model.mapper.Mapper;
-import at.medunigraz.imi.abbres.model.mapper.StrictMapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.matcher.RightBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
+import at.medunigraz.imi.abbres.model.policy.FuzzyMapper;
+import at.medunigraz.imi.abbres.model.policy.Mapper;
+import at.medunigraz.imi.abbres.model.policy.StrictMapper;
 import at.medunigraz.imi.abbres.resolver.DefaultResolver;
 import at.medunigraz.imi.abbres.resolver.Resolver;
 

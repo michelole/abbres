@@ -1,4 +1,4 @@
-package at.medunigraz.imi.abbres.model.mapper;
+package at.medunigraz.imi.abbres.model.policy;
 
 import java.util.AbstractMap;
 import java.util.Map;

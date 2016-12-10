@@ -1,7 +1,8 @@
-package at.medunigraz.imi.abbres.model.mapper;
+package at.medunigraz.imi.abbres.model.policy;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.matcher.UnigramMatcher;
+import at.medunigraz.imi.abbres.model.policy.FuzzyMapper;
 import junit.framework.TestCase;
 
 public class FuzzyMapperTest extends TestCase {

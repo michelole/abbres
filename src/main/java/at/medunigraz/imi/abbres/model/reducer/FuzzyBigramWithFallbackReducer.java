@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableSet;
 
-import at.medunigraz.imi.abbres.model.mapper.Mapper;
+import at.medunigraz.imi.abbres.model.policy.Mapper;
 
 public class FuzzyBigramWithFallbackReducer implements Reducer {
 
