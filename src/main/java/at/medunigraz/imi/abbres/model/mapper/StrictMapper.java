@@ -1,11 +1,12 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
+import at.medunigraz.imi.abbres.model.policy.StrictPolicy;
 
 public class StrictMapper extends AbstractMapper {
 
 	public StrictMapper(Matcher matcher) {
-		super(matcher);
+		super(matcher, new StrictPolicy());
 	}
 
 	@Deprecated
@@ -42,10 +43,6 @@ public class StrictMapper extends AbstractMapper {
 			return matcherComparison;
 		}
 		return 0;
-	}
-
-	public boolean containChars(String abbreviation, String expansion) {
-		return true;
 	}
 
 }

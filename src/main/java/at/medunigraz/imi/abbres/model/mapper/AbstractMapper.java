@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
+import at.medunigraz.imi.abbres.model.policy.Policy;
 
 public abstract class AbstractMapper implements Mapper {
 	protected Map<String, Integer> candidates = null;
@@ -13,10 +14,13 @@ public abstract class AbstractMapper implements Mapper {
 
 	protected Matcher matcher;
 	
+	protected Policy policy;
+	
 	private static final int MIN_COUNT = 1;
 
-	public AbstractMapper(Matcher matcher) {
+	public AbstractMapper(Matcher matcher, Policy policy) {
 		this.matcher = matcher;
+		this.policy = policy;
 	}
 	
 	public Map<String, Integer> map() {
@@ -30,7 +34,7 @@ public abstract class AbstractMapper implements Mapper {
 			String expansion = matcher.expansion(entry.getKey());
 			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
 
-			if (containChars(trimmedAbbrev, expansion) && matcher.getAbbreviation().isValidExpansion(expansion)) {
+			if (policy.containChars(trimmedAbbrev, expansion) && matcher.getAbbreviation().isValidExpansion(expansion)) {
 				ret.put(expansion, entry.getValue());
 			}
 		}

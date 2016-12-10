@@ -32,8 +32,5 @@ public interface Mapper extends Comparable<Mapper> {
 	public Matcher getMatcher();
 	
 	@Deprecated
-	public boolean containChars(String abbreviation, String expansion);
-	
-	@Deprecated
 	public String prefix();
 }

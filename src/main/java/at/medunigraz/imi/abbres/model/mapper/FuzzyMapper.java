@@ -1,35 +1,12 @@
 package at.medunigraz.imi.abbres.model.mapper;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
+import at.medunigraz.imi.abbres.model.policy.FuzzyPolicy;
 
 public class FuzzyMapper extends AbstractMapper {
 
 	public FuzzyMapper(Matcher matcher) {
-		super(matcher);
-	}
-
-	/**
-	 * Checks if the expansion contains the abbreviation chars in the same order
-	 * 
-	 * @param abbreviation
-	 * @param expansion
-	 * @return
-	 * @deprecated
-	 */
-	public boolean containChars(String abbreviation, String expansion) {
-		for (int i = 0, j = 0; i < abbreviation.length(); i++, j++) {
-			char a = abbreviation.charAt(i);
-			for (; j < expansion.length(); j++) {
-				char e = expansion.charAt(j);
-				if (a == e) {
-					break;
-				}
-			}
-			if (j == expansion.length() && i != abbreviation.length()) {
-				return false;
-			}
-		}
-		return true;
+		super(matcher, new FuzzyPolicy());
 	}
 
 	@Deprecated
