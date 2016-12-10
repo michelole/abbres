@@ -11,24 +11,6 @@ public class StrictMapper extends AbstractMapper {
 		super(matcher);
 	}
 
-	@Override
-	public Map<String, Integer> map() {
-		String prefix = prefix();
-		String suffix = matcher.suffix();
-
-		Map<String, Integer> subMap = matcher.submap(prefix, suffix);
-		Map<String, Integer> ret = new TreeMap<>();
-
-		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			String expansion = matcher.expansion(entry.getKey());
-			if (matcher.getAbbreviation().isValidExpansion(expansion)) {
-				ret.put(expansion, entry.getValue());
-			}
-		}
-
-		return ret;
-	}
-
 	@Deprecated
 	public String prefix() {
 		String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
@@ -63,6 +45,10 @@ public class StrictMapper extends AbstractMapper {
 			return matcherComparison;
 		}
 		return 0;
+	}
+
+	public boolean containChars(String abbreviation, String expansion) {
+		return true;
 	}
 
 }

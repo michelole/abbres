@@ -2,6 +2,7 @@ package at.medunigraz.imi.abbres.model.mapper;
 
 import java.util.AbstractMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 
@@ -17,6 +18,25 @@ public abstract class AbstractMapper implements Mapper {
 
 	public AbstractMapper(Matcher matcher) {
 		this.matcher = matcher;
+	}
+	
+	public Map<String, Integer> map() {
+		String prefix = prefix();
+		String suffix = matcher.suffix();
+
+		Map<String, Integer> subMap = matcher.submap(prefix, suffix);
+		Map<String, Integer> ret = new TreeMap<>();
+
+		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
+			String expansion = matcher.expansion(entry.getKey());
+			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
+
+			if (containChars(trimmedAbbrev, expansion) && matcher.getAbbreviation().isValidExpansion(expansion)) {
+				ret.put(expansion, entry.getValue());
+			}
+		}
+
+		return ret;
 	}
 
 	public Map<String, Integer> getCandidates() {
