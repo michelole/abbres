@@ -30,4 +30,24 @@ public final class TextUtils {
 		}
 		return s.substring(0, s.indexOf(TextUtils.ABBREVIATION_MARK));
 	}
+
+	/**
+	 * Gets the left token of a bigram.
+	 * 
+	 * @param bigram
+	 * @return
+	 */
+	public static String left(String bigram) {
+		return bigram.substring(0, bigram.indexOf(DEFAULT_TOKEN_SEPARATOR));
+	}
+
+	/**
+	 * Gets the right token of a bigram.
+	 * 
+	 * @param bigram
+	 * @return
+	 */
+	public static String right(String bigram) {
+		return bigram.substring(bigram.indexOf(DEFAULT_TOKEN_SEPARATOR) + 1, bigram.length());
+	}
 }

@@ -29,4 +29,9 @@ public class UnigramMatcher extends AbstractMatcher {
 		return entryKey;
 	}
 
+	@Override
+	public String context(String entryKey) {
+		return "";
+	}
+
 }

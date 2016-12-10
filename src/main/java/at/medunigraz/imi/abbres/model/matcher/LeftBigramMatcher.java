@@ -24,8 +24,12 @@ public class LeftBigramMatcher extends AbstractMatcher {
 
 	@Override
 	public String expansion(String entryKey) {
-		// Gets the right token of a bigram.
-		return entryKey.substring(entryKey.indexOf(TextUtils.DEFAULT_TOKEN_SEPARATOR) + 1, entryKey.length());
+		return TextUtils.right(entryKey);
+	}
+
+	@Override
+	public String context(String entryKey) {
+		return TextUtils.left(entryKey);
 	}
 
 	@Override
