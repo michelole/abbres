@@ -72,6 +72,10 @@ public class Abbreviation implements Cloneable {
 		return expansion;
 	}
 
+	public String getTokenWithContext() {
+		return TextUtils.concatenate(TextUtils.concatenate(leftContext.getUnigram(), token), rightContext.getUnigram());
+	}
+
 	/**
 	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
 	 * 
@@ -93,17 +97,17 @@ public class Abbreviation implements Cloneable {
 		if (!ALLOWED_EXPANSION.matcher(expansion).matches()) {
 			return false;
 		}
-		
+
 		// There is no gain on replacing a char with an abbreviation mark...
 		if (absoluteGain(expansion) <= 1) {
 			return false;
 		}
-		
+
 		// The expansion must provide a minimum information gain
 		if (relativeGain(expansion) < MIN_GAIN) {
 			return false;
 		}
-		
+
 		// ...but the gain should not be enormous
 		if (relativeGain(expansion) > MAX_GAIN) {
 			return false;
@@ -111,15 +115,15 @@ public class Abbreviation implements Cloneable {
 
 		return true;
 	}
-	
+
 	public int absoluteGain(String expansion) {
 		return expansion.length() - this.getTrimmedToken().length();
 	}
-	
+
 	public float relativeGain(String expansion) {
 		int tokenLength = this.getTrimmedToken().length();
 		int expansionLength = expansion.length();
-		
+
 		return (expansionLength - tokenLength) / (float) tokenLength;
 	}
 
