@@ -19,6 +19,16 @@ public final class TextUtils {
 	}
 
 	/**
+	 * Checks whether a string is an abbreviation.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static boolean isAbbreviation(String s) {
+		return s.endsWith(String.valueOf(ABBREVIATION_MARK));
+	}
+
+	/**
 	 * Removes the abbreviation mark, if present.
 	 * 
 	 * @param s
