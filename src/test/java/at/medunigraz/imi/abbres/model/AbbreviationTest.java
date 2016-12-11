@@ -18,6 +18,7 @@ public class AbbreviationTest extends TestCase {
 		assertTrue((new Abbreviation("u.")).isValidExpansion("und"));
 		assertTrue((new Abbreviation("rez.")).isValidExpansion("rezidivierende"));	// Gain = 3.67
 		assertTrue((new Abbreviation("intensiv.")).isValidExpansion("intensives"));	// Gain = 0.25
+		assertFalse((new Abbreviation("p.")).isValidExpansion("propter"));	// Gain = 6
 		assertFalse((new Abbreviation("re.")).isValidExpansion("rechtsventrikulär"));
 		assertFalse((new Abbreviation("li.")).isValidExpansion("lipidsenkenden"));
 	}
