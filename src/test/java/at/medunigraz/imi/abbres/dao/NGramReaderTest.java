@@ -12,14 +12,14 @@ public class NGramReaderTest extends TestCase {
 		String key;
 		Integer value;
 
-		reader = new NGramReader(new File("src/test/resources/unigram.tsv"));
+		reader = new NGramReader(new File("src/test/resources/unigram.tsv"), 1);
 		nGramMap = reader.readAll();
 		key = "unigram";
 		value = 300000;
 		assertTrue(nGramMap.containsKey(key));
 		assertEquals(value, nGramMap.get(key));
 
-		reader = new NGramReader(new File("src/test/resources/bigram.tsv"));
+		reader = new NGramReader(new File("src/test/resources/bigram.tsv"), 2);
 		nGramMap = reader.readAll();
 		key = "test bigram";
 		value = 20000;

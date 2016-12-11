@@ -69,7 +69,7 @@ public class NGramMapFactory {
 	public static NGramMap getUnigram() {
 		if (unigramMap == null) {
 			if (!Files.isReadable(Paths.get(DEFAULT_UNIGRAM_CACHE))) {
-				NGramReader reader = new NGramReader(new File(DEFAULT_UNIGRAM_FILE));
+				NGramReader reader = new NGramReader(new File(DEFAULT_UNIGRAM_FILE), 1);
 				unigramMap = new NGramMap(reader.readAll());
 				serializeUnigram();
 			}
@@ -81,7 +81,7 @@ public class NGramMapFactory {
 	public static NGramMap getBigram() {
 		if (bigramMap == null) {
 			if (!Files.isReadable(Paths.get(DEFAULT_BIGRAM_CACHE))) {
-				NGramReader reader = new NGramReader(new File(DEFAULT_BIGRAM_FILE));
+				NGramReader reader = new NGramReader(new File(DEFAULT_BIGRAM_FILE), 2);
 				bigramMap = new NGramMap(reader.readAll());
 				serializeBigram();
 			}
