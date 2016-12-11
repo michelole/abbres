@@ -31,18 +31,23 @@ public abstract class AbstractMapper implements Mapper {
 		Map<String, Integer> ret = new TreeMap<>();
 
 		for (Map.Entry<String, Integer> entry : subMap.entrySet()) {
-			String expansion = matcher.expansion(entry.getKey());
-			String trimmedAbbrev = matcher.getAbbreviation().getTrimmedToken();
-
-			if (!policy.isValidExpansion(trimmedAbbrev, expansion)) {
+			String tokenExpansion = matcher.expansion(entry.getKey());
+			String token = matcher.getAbbreviation().getTrimmedToken();
+			if (!policy.isValidExpansion(token, tokenExpansion)) {
 				continue;
 			}
 
-			if (!matcher.getAbbreviation().isValidExpansion(expansion)) {
+			String context = matcher.context(matcher.getAbbreviation().getTokenWithContext());
+			String contextExpansion = matcher.context(entry.getKey());
+			if (!policy.isValidExpansion(context, contextExpansion)) {
 				continue;
 			}
 
-			ret.put(expansion, entry.getValue());
+			if (!matcher.getAbbreviation().isValidExpansion(tokenExpansion)) {
+				continue;
+			}
+
+			ret.put(tokenExpansion, entry.getValue());
 		}
 
 		return ret;
