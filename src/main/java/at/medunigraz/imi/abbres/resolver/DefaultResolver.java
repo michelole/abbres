@@ -29,24 +29,22 @@ public class DefaultResolver implements Resolver {
 		Matcher rightBigram = new RightBigramMatcher(abbreviation);
 		
 		Policy strict = new StrictPolicy();
-
-		Mapper strictUnigram = new SingleMapper(unigram, strict);
-		Mapper strictLeftBigram = new SingleMapper(leftBigram, strict);
-		Mapper strictRightBigram = new SingleMapper(rightBigram, strict);
+		Mapper singleStrictUnigram = new SingleMapper(unigram, strict);
+		Mapper singleStrictLeftBigram = new SingleMapper(leftBigram, strict);
+		Mapper singleStrictRightBigram = new SingleMapper(rightBigram, strict);
 		
 		Policy fuzzy = new FuzzyPolicy();
-
-		Mapper fuzzyUnigram = new SingleMapper(unigram, fuzzy);
-		Mapper fuzzyLeftBigram = new SingleMapper(leftBigram, fuzzy);
-		Mapper fuzzyRightBigram = new SingleMapper(rightBigram, fuzzy);
+		Mapper singleFuzzyUnigram = new SingleMapper(unigram, fuzzy);
+		Mapper singleFuzzyLeftBigram = new SingleMapper(leftBigram, fuzzy);
+		Mapper singleFuzzyRightBigram = new SingleMapper(rightBigram, fuzzy);
 
 		NavigableSet<Mapper> set = new TreeSet<>();
-		set.add(strictUnigram);
-		set.add(strictLeftBigram);
-		set.add(strictRightBigram);
-		set.add(fuzzyUnigram);
-		set.add(fuzzyLeftBigram);
-		set.add(fuzzyRightBigram);
+		set.add(singleStrictUnigram);
+		set.add(singleStrictLeftBigram);
+		set.add(singleStrictRightBigram);
+		set.add(singleFuzzyUnigram);
+		set.add(singleFuzzyLeftBigram);
+		set.add(singleFuzzyRightBigram);
 
 		return new FuzzyBigramWithFallbackReducer().reduce(set);
 	}
