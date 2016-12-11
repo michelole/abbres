@@ -20,7 +20,7 @@ public class DoubleMapper extends AbstractMapper {
 		if (!TextUtils.isAbbreviation(context)) {
 			return new AbstractMap.SimpleEntry<>("", 0);
 		}
-		return super.getBestEntry();
+		return super.calculateBestEntry();
 	}
 
 	@Override
