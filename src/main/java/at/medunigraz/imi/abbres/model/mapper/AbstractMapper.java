@@ -75,7 +75,7 @@ public abstract class AbstractMapper implements Mapper {
 		return bestEntry;
 	}
 
-	private Map.Entry<String, Integer> calculateBestEntry() {
+	protected Map.Entry<String, Integer> calculateBestEntry() {
 		Map.Entry<String, Integer> bestEntry = new AbstractMap.SimpleEntry<>("", 0);
 		int bestCount = 0;
 		for (Map.Entry<String, Integer> entry : getCandidates().entrySet()) {
