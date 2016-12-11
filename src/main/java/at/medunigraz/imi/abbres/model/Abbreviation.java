@@ -25,6 +25,8 @@ public class Abbreviation implements Cloneable {
 
 	public Abbreviation(String token) {
 		this.token = token;
+		this.leftContext = new LeftContext("");
+		this.rightContext = new RightContext("");
 	}
 
 	public Abbreviation withLeftContext(LeftContext leftContext) {
