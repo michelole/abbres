@@ -53,8 +53,8 @@ public class DefaultResolver implements Resolver {
 		set.add(singleFuzzyUnigram);
 		set.add(singleFuzzyLeftBigram);
 		set.add(singleFuzzyRightBigram);
-		set.add(doubleFuzzyLeftBigram);
-		set.add(doubleFuzzyRightBigram);
+//		set.add(doubleFuzzyLeftBigram);
+//		set.add(doubleFuzzyRightBigram);
 
 		return new FuzzyBigramWithFallbackReducer().reduce(set);
 	}
