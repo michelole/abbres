@@ -77,6 +77,10 @@ public class Abbreviation implements Cloneable {
 	public String getTokenWithContext() {
 		return TextUtils.concatenate(TextUtils.concatenate(leftContext.getUnigram(), token), rightContext.getUnigram());
 	}
+	
+	public static boolean isValidExpansion(String token, String expansion) {
+		return new Abbreviation(token).isValidExpansion(expansion);
+	}
 
 	/**
 	 * Checks if an expansion is a valid expansion of a candidate abbreviation.
