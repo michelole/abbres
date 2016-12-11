@@ -38,13 +38,16 @@ public class NGramReader {
 	public Map<String, Integer> readAll() {
 		LOG.info("Loading file " + file.getAbsolutePath());
 		Map<String, Integer> nGramMap = new TreeMap<>();
+		
+		int unexpectedRecordLength = 0, unexpectedNgramLength = 0;
 
 		try (CSVReader reader = new CSVReader(new FileReader(file), '\t', '\0');) {
 			String[] record;
 			while ((record = reader.readNext()) != null) {
 				if (record.length != 2) {
-					LOG.trace(String.format("Ignored unexpected record length (%s) at line %s: %s", record.length,
+					LOG.trace(String.format("Unexpected record length (%s) at line %s: %s", record.length,
 							reader.getLinesRead(), Arrays.toString(record)));
+					unexpectedRecordLength++;
 					continue;
 				}
 
@@ -52,8 +55,9 @@ public class NGramReader {
 				String ngram = record[1].trim();
 				int ngramLength = TOKEN_SEPARATOR.split(ngram).length;
 				if (ngramLength != n) {
-					LOG.trace(String.format("Ignored unexpected ngram length (%s) at line %s: %s", ngramLength,
+					LOG.trace(String.format("Unexpected ngram length (%s) at line %s: %s", ngramLength,
 							reader.getLinesRead(), Arrays.toString(record)));
+					unexpectedNgramLength++;
 					continue;
 				}
 				nGramMap.put(ngram, count);
@@ -61,6 +65,9 @@ public class NGramReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		LOG.warn(String.format("Ignored %d records with unexpected length.", unexpectedRecordLength));
+		LOG.warn(String.format("Ignored %d ngrams with unexpected length.", unexpectedNgramLength));
 
 		return nGramMap;
 	}
