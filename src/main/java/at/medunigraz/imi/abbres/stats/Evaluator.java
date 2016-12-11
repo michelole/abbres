@@ -51,15 +51,12 @@ public class Evaluator {
 	public void evaluate() {
 		while (validation.hasNext()) {
 			Abbreviation gold = validation.next();
+			validation.writeGuess("");
 			if (gold == null) {
 				continue;
 			}
 
-			Abbreviation guess = gold.clone();
-
-			// Ensure guess is empty both in memory and in file
-			guess.withExpansion("");
-			validation.writeGuess("");
+			Abbreviation guess = gold.clone().withExpansion("");
 
 			LOG.trace("Resolving " + guess.getTokenWithContext());
 
