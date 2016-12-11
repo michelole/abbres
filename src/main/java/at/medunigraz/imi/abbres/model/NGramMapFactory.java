@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import at.medunigraz.imi.abbres.dao.NGramReader;
 
 public class NGramMapFactory {
-	private static transient final Logger LOG = LoggerFactory.getLogger(NGramMap.class);
+	private static transient final Logger LOG = LoggerFactory.getLogger(NGramMapFactory.class);
 
 	private static NGramMap unigramMap = null;
 	private static NGramMap bigramMap = null;
@@ -41,7 +41,7 @@ public class NGramMapFactory {
 
 	private static NGramMap deserializeNGram(File file) {
 		NGramMap ret = null;
-		LOG.trace("Deserializing ngram map from " + file.getName());
+		LOG.info("Deserializing ngram map from " + file.getName());
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
 			ret = (NGramMap) in.readObject();
 		} catch (Exception e) {
