@@ -60,6 +60,8 @@ public class Evaluator {
 			// Ensure guess is empty both in memory and in file
 			guess.withExpansion("");
 			validation.writeGuess("");
+			
+			LOG.trace("Resolving " + guess.getTokenWithContext());
 
 			guess.withExpansion(resolver.resolve(guess));
 			float similarity = gold.tokenSimilarity(guess);
