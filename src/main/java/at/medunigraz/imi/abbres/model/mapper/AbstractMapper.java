@@ -4,6 +4,7 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.policy.Policy;
 
@@ -36,14 +37,13 @@ public abstract class AbstractMapper implements Mapper {
 			if (!policy.isValidExpansion(token, tokenExpansion)) {
 				continue;
 			}
-
-			String context = matcher.context(matcher.getAbbreviation().getTokenWithContext());
-			String contextExpansion = matcher.context(entry.getKey());
-			if (!policy.isValidExpansion(context, contextExpansion)) {
+			if (!matcher.getAbbreviation().isValidExpansion(tokenExpansion)) {
 				continue;
 			}
 
-			if (!matcher.getAbbreviation().isValidExpansion(tokenExpansion)) {
+			String context = matcher.context(matcher.getAbbreviation().getTokenWithContext());
+			String contextExpansion = matcher.context(entry.getKey());
+			if (!isValidContext(context, contextExpansion)) {
 				continue;
 			}
 

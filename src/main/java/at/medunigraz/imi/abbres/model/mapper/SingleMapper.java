@@ -19,6 +19,11 @@ public class SingleMapper extends AbstractMapper {
 		
 		return policy.prefix(abbreviation);
 	}
+	
+	@Override
+	public boolean isValidContext(String context, String contextExpansion) {
+		return true;
+	}
 
 	public int getPriority() {
 		return 10;

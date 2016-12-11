@@ -37,6 +37,19 @@ public class DoubleMapper extends AbstractMapper {
 	public String suffix(Abbreviation abbreviation) {
 		return "";
 	}
+	
+	@Override
+	public boolean isValidContext(String context, String contextExpansion) {
+		if (!policy.isValidExpansion(context, contextExpansion)) {
+			return false;
+		}
+		
+		if (!Abbreviation.isValidExpansion(context, contextExpansion)) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	@Override
 	public int getPriority() {

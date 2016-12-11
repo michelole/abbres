@@ -37,6 +37,8 @@ public interface Mapper extends Comparable<Mapper> {
 	public String prefix(Abbreviation abbreviation);
 	
 	public String suffix(Abbreviation abbreviation);
+	
+	public boolean isValidContext(String context, String contextExpansion);
 
 	public int getPriority();
 }
