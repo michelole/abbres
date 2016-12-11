@@ -2,14 +2,13 @@ package at.medunigraz.imi.abbres.model.policy;
 
 import junit.framework.TestCase;
 
-public class FuzzyPolicyTest extends TestCase {
-
+public class StrictPolicyTest extends TestCase {
 	public void testIsValidExpansion() {
-		Policy policy = new FuzzyPolicy();
+		Policy policy = new StrictPolicy();
 
-		assertTrue(policy.isValidExpansion("Tbl", "Tablette"));
+		assertFalse(policy.isValidExpansion("Tbl", "Tablette"));
 		assertTrue(policy.isValidExpansion("Tbl", "Tblzahl"));
-		assertTrue(policy.isValidExpansion("Tbl", "Taubal"));
+		assertFalse(policy.isValidExpansion("Tbl", "Taubal"));
 		assertTrue(policy.isValidExpansion("Tbl", "Tbl"));
 
 		assertTrue(policy.isValidExpansion("T", "Table"));
@@ -18,7 +17,8 @@ public class FuzzyPolicyTest extends TestCase {
 		assertFalse(policy.isValidExpansion("Tbl", "Tomato"));
 		assertFalse(policy.isValidExpansion("Tbl", "Tb"));
 		
-		assertTrue(policy.isValidExpansion("Tbl.", "Tablette"));
+		assertFalse(policy.isValidExpansion("Tbl.", "Tablette"));
 		assertTrue(policy.isValidExpansion("Tbl.", "Tblzahl"));
 	}
+
 }

@@ -10,12 +10,13 @@ public class StrictPolicy extends AbstractPolicy {
 	}
 
 	private boolean isLeftSubstring(String abbreviation, String expansion) {
-		if (expansion.length() < abbreviation.length()) {
+		String trimmedAbbrev = TextUtils.trimAbbreviation(abbreviation);
+		if (expansion.length() < trimmedAbbrev.length()) {
 			return false;
 		}
 
-		for (int i = 0; i < abbreviation.length(); i++) {
-			if (abbreviation.charAt(i) != expansion.charAt(i)) {
+		for (int i = 0; i < trimmedAbbrev.length(); i++) {
+			if (trimmedAbbrev.charAt(i) != expansion.charAt(i)) {
 				return false;
 			}
 		}

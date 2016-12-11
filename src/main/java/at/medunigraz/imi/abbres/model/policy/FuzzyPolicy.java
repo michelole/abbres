@@ -1,5 +1,7 @@
 package at.medunigraz.imi.abbres.model.policy;
 
+import at.medunigraz.imi.abbres.TextUtils;
+
 public class FuzzyPolicy extends AbstractPolicy {
 	
 	@Override
@@ -15,15 +17,16 @@ public class FuzzyPolicy extends AbstractPolicy {
 	 * @return
 	 */
 	private boolean containCharsSameOrder(String abbreviation, String expansion) {
-		for (int i = 0, j = 0; i < abbreviation.length(); i++, j++) {
-			char a = abbreviation.charAt(i);
+		String trimmedAbbrev = TextUtils.trimAbbreviation(abbreviation);
+		for (int i = 0, j = 0; i < trimmedAbbrev.length(); i++, j++) {
+			char a = trimmedAbbrev.charAt(i);
 			for (; j < expansion.length(); j++) {
 				char e = expansion.charAt(j);
 				if (a == e) {
 					break;
 				}
 			}
-			if (j == expansion.length() && i != abbreviation.length()) {
+			if (j == expansion.length() && i != trimmedAbbrev.length()) {
 				return false;
 			}
 		}
