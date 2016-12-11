@@ -13,14 +13,20 @@ public class AbbreviationTest extends TestCase {
 
 		// No absolute gain
 		assertFalse((new Abbreviation("bds.")).isValidExpansion("bdsl"));
-		
-		// Relative gain limits
-		assertTrue((new Abbreviation("u.")).isValidExpansion("und"));
-		assertTrue((new Abbreviation("rez.")).isValidExpansion("rezidivierende"));	// Gain = 3.67
-		assertTrue((new Abbreviation("intensiv.")).isValidExpansion("intensives"));	// Gain = 0.25
-		assertFalse((new Abbreviation("p.")).isValidExpansion("propter"));	// Gain = 6
-		assertFalse((new Abbreviation("re.")).isValidExpansion("rechtsventrikulär"));
-		assertFalse((new Abbreviation("li.")).isValidExpansion("lipidsenkenden"));
+
+		// Reasonable gains, valid expansions
+		assertTrue((new Abbreviation("intensiv.")).isValidExpansion("intensives")); // 0.25
+		assertTrue((new Abbreviation("ret.")).isValidExpansion("retard")); // 1.00
+		assertTrue((new Abbreviation("u.")).isValidExpansion("und")); // 2.00
+		assertTrue((new Abbreviation("rez.")).isValidExpansion("rezidivierende")); // 3.67
+		assertTrue((new Abbreviation("ms.")).isValidExpansion("Millisekunden")); // 5.50
+
+		//assertFalse((new Abbreviation("ret.")).isValidExpansion("retrosternales")); // 3.67
+
+		// Extreme gains, not valid
+		assertFalse((new Abbreviation("p.")).isValidExpansion("propter")); // 6.00
+		assertFalse((new Abbreviation("li.")).isValidExpansion("lipidsenkenden")); // 6.00
+		assertFalse((new Abbreviation("re.")).isValidExpansion("rechtsventrikulär")); // 7.50
 	}
 
 }
