@@ -21,7 +21,7 @@ public class Evaluator {
 
 	private static final float SIMILARITY_THRESHOLD = 0.7f;
 
-	private int correct = 0, total = 0, partial = 0;
+	private int correct = 0, total = 0, partial = 0, empty = 0;
 
 	public Evaluator() {
 		validation = new ValidationReader(new File(DEFAULT_VALIDATION));
@@ -36,12 +36,34 @@ public class Evaluator {
 		return (correct + partial) / (double) total;
 	}
 
+	public double getPartialPrecision() {
+		return (correct + partial) / (double) (total - empty);
+	}
+
+	public double getPartialRecall() {
+		return getPartialAccuracy();
+	}
+
+	public double getPartialF1Score() {
+		return getPartialFScore(1f);
+	}
+
+	private double getPartialFScore(float beta) {
+		double precision = getPartialPrecision();
+		double recall = getPartialRecall();
+		return (1 + Math.pow(beta, 2)) * precision * recall / (precision + recall);
+	}
+
 	public int getPartialTotal() {
 		return correct + partial;
 	}
 
 	public int getCorrect() {
 		return correct;
+	}
+
+	public int getNotEmpty() {
+		return total - empty;
 	}
 
 	public int getTotal() {
@@ -60,7 +82,11 @@ public class Evaluator {
 
 			LOG.trace("Resolving " + guess.getTokenWithContext());
 
-			guess.withExpansion(resolver.resolve(guess));
+			String expansion = resolver.resolve(guess);
+			guess.withExpansion(expansion);
+			if (expansion.isEmpty()) {
+				empty++;
+			}
 			if (gold.equals(guess)) {
 				correct++;
 			} else {
@@ -91,9 +117,10 @@ public class Evaluator {
 		Evaluator e = new Evaluator();
 		e.evaluate();
 		LOG.info(String.format("Total: %d", e.getTotal()));
-		LOG.info(String.format("Strict matches: %d (%.4f)", e.getCorrect(), e.getAccuracy()));
-		LOG.info(String.format("Partial matches: %d (%.4f) (sim > %.4f)", e.getPartialTotal(), e.getPartialAccuracy(),
-				SIMILARITY_THRESHOLD));
+		LOG.info(String.format("Not empty guesses: %d", e.getNotEmpty()));
+		LOG.info(String.format("Strict matches: %d (A = %.4f)", e.getCorrect(), e.getAccuracy()));
+		LOG.info(String.format("Partial matches: %d (P = %.4f, R = %.4f, F1 = %.4f) (sim > %.4f)", e.getPartialTotal(),
+				e.getPartialPrecision(), e.getPartialRecall(), e.getPartialF1Score(), SIMILARITY_THRESHOLD));
 	}
 
 }
