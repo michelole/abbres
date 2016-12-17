@@ -4,7 +4,6 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import at.medunigraz.imi.abbres.model.Abbreviation;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.policy.Policy;
 
