@@ -65,22 +65,23 @@ public class Debugger {
 			set.add(singleStrictRightBigram);
 			set.add(doubleStrictLeftBigram);
 			set.add(doubleStrictRightBigram);
-			
+
 			set.add(singleFuzzyUnigram);
 			set.add(singleFuzzyLeftBigram);
 			set.add(singleFuzzyRightBigram);
-//			set.add(doubleFuzzyLeftBigram);
-//			set.add(doubleFuzzyRightBigram);
+			// set.add(doubleFuzzyLeftBigram);
+			// set.add(doubleFuzzyRightBigram);
 
 			for (Iterator<Mapper> iter = set.descendingIterator(); iter.hasNext();) {
 				Mapper mapper = iter.next();
 
 				String mapperClass = mapper.getClass().getSimpleName();
 				String matcherClass = mapper.getMatcher().getClass().getSimpleName();
+				String policyClass = mapper.getPolicy().getClass().getSimpleName();
 				String gram = mapper.getBestEntry().getKey();
 				int frequency = mapper.getBestEntry().getValue();
-				System.out.println(
-						String.format("%s %s best guess: %s (%d)", mapperClass, matcherClass, gram, frequency));
+				System.out.println(String.format("%s %s %s best guess: %s (%d)", mapperClass, policyClass, matcherClass,
+						gram, frequency));
 
 			}
 
