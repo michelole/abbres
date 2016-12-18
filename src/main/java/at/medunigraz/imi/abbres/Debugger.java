@@ -8,6 +8,7 @@ import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import at.medunigraz.imi.abbres.model.Abbreviation;
+import at.medunigraz.imi.abbres.model.mapper.DoubleMapper;
 import at.medunigraz.imi.abbres.model.mapper.Mapper;
 import at.medunigraz.imi.abbres.model.mapper.SingleMapper;
 import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
@@ -45,24 +46,31 @@ public class Debugger {
 			Matcher rightBigram = new RightBigramMatcher(a);
 
 			Policy strict = new StrictPolicy();
-
-			Mapper strictUnigram = new SingleMapper(unigram, strict);
-			Mapper strictLeftBigram = new SingleMapper(leftBigram, strict);
-			Mapper strictRightBigram = new SingleMapper(rightBigram, strict);
+			Mapper singleStrictUnigram = new SingleMapper(unigram, strict);
+			Mapper singleStrictLeftBigram = new SingleMapper(leftBigram, strict);
+			Mapper singleStrictRightBigram = new SingleMapper(rightBigram, strict);
+			Mapper doubleStrictLeftBigram = new DoubleMapper(leftBigram, strict);
+			Mapper doubleStrictRightBigram = new DoubleMapper(rightBigram, strict);
 
 			Policy fuzzy = new FuzzyPolicy();
-
-			Mapper fuzzyUnigram = new SingleMapper(unigram, fuzzy);
-			Mapper fuzzyLeftBigram = new SingleMapper(leftBigram, fuzzy);
-			Mapper fuzzyRightBigram = new SingleMapper(rightBigram, fuzzy);
+			Mapper singleFuzzyUnigram = new SingleMapper(unigram, fuzzy);
+			Mapper singleFuzzyLeftBigram = new SingleMapper(leftBigram, fuzzy);
+			Mapper singleFuzzyRightBigram = new SingleMapper(rightBigram, fuzzy);
+			Mapper doubleFuzzyLeftBigram = new DoubleMapper(leftBigram, fuzzy);
+			Mapper doubleFuzzyRightBigram = new DoubleMapper(rightBigram, fuzzy);
 
 			NavigableSet<Mapper> set = new TreeSet<>();
-			set.add(strictUnigram);
-			set.add(strictLeftBigram);
-			set.add(strictRightBigram);
-			set.add(fuzzyUnigram);
-			set.add(fuzzyLeftBigram);
-			set.add(fuzzyRightBigram);
+			set.add(singleStrictUnigram);
+			set.add(singleStrictLeftBigram);
+			set.add(singleStrictRightBigram);
+			set.add(doubleStrictLeftBigram);
+			set.add(doubleStrictRightBigram);
+			
+			set.add(singleFuzzyUnigram);
+			set.add(singleFuzzyLeftBigram);
+			set.add(singleFuzzyRightBigram);
+//			set.add(doubleFuzzyLeftBigram);
+//			set.add(doubleFuzzyRightBigram);
 
 			for (Iterator<Mapper> iter = set.descendingIterator(); iter.hasNext();) {
 				Mapper mapper = iter.next();
