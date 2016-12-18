@@ -4,6 +4,7 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import at.medunigraz.imi.abbres.model.matcher.LeftBigramMatcher;
 import at.medunigraz.imi.abbres.model.matcher.Matcher;
 import at.medunigraz.imi.abbres.model.policy.Policy;
 
@@ -106,7 +107,11 @@ public abstract class AbstractMapper implements Mapper {
 		}
 
 		int bestEntryDiff = this.getBestEntry().getValue() - o.getBestEntry().getValue();
-		return bestEntryDiff;
+		if (bestEntryDiff != 0) {
+			return bestEntryDiff;
+		}
+		
+		return this.getMatcher() instanceof LeftBigramMatcher ? +1 : -1;
 	}
 
 }
