@@ -7,7 +7,7 @@ public final class TextUtils {
 	@Deprecated
 	public static final char DEFAULT_TOKEN_SEPARATOR = ' ';
 
-	private static final boolean CASE_SENSITIVE = false;
+	private static final boolean CASE_SENSITIVE = true;
 
 	/**
 	 * Concatenates two strings using the default token separator.
