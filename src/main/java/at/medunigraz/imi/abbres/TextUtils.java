@@ -7,6 +7,8 @@ public final class TextUtils {
 	@Deprecated
 	public static final char DEFAULT_TOKEN_SEPARATOR = ' ';
 
+	private static final boolean CASE_SENSITIVE = false;
+
 	/**
 	 * Concatenates two strings using the default token separator.
 	 * 
@@ -59,5 +61,20 @@ public final class TextUtils {
 	 */
 	public static String right(String bigram) {
 		return bigram.substring(bigram.lastIndexOf(DEFAULT_TOKEN_SEPARATOR) + 1, bigram.length());
+	}
+
+	/**
+	 * Cleans and standardize a given string.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static String standardize(String s) {
+		String ret = s.trim();
+		if (CASE_SENSITIVE) {
+			return ret;
+		}
+
+		return ret.toLowerCase();
 	}
 }
