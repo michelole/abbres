@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import com.opencsv.CSVReader;
 
+import at.medunigraz.imi.abbres.TextUtils;
+
 public class NGramReader {
 	private static final Logger LOG = LoggerFactory.getLogger(NGramReader.class);
 	
@@ -52,7 +54,7 @@ public class NGramReader {
 				}
 
 				int count = Integer.parseInt(record[0].trim());
-				String ngram = record[1].trim();
+				String ngram = TextUtils.standardize(record[1]);
 				int ngramLength = TOKEN_SEPARATOR.split(ngram).length;
 				if (ngramLength != n) {
 					LOG.trace(String.format("Unexpected ngram length (%s) at line %s: %s", ngramLength,
@@ -60,7 +62,8 @@ public class NGramReader {
 					unexpectedNgramLength++;
 					continue;
 				}
-				nGramMap.put(ngram, count);
+				
+				nGramMap.merge(ngram, count, (v1, v2) -> v1 + v2);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

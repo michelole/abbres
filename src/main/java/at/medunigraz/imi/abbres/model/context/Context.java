@@ -1,5 +1,7 @@
 package at.medunigraz.imi.abbres.model.context;
 
+import at.medunigraz.imi.abbres.TextUtils;
+
 public abstract class Context {
 
 	protected static final String TOKEN_SEPARATOR = " ";
@@ -7,7 +9,7 @@ public abstract class Context {
 	protected String text;
 
 	public Context(String text) {
-		this.text = text;
+		this.text = TextUtils.standardize(text);
 	}
 
 	public String getUnigram() {
