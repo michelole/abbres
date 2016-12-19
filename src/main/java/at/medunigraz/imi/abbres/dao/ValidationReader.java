@@ -20,8 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import at.medunigraz.imi.abbres.TextUtils;
 import at.medunigraz.imi.abbres.model.Abbreviation;
-import at.medunigraz.imi.abbres.model.context.LeftContext;
-import at.medunigraz.imi.abbres.model.context.RightContext;
 import at.medunigraz.imi.abbres.stats.Evaluator;
 
 public class ValidationReader implements Closeable, Iterator<Abbreviation> {
