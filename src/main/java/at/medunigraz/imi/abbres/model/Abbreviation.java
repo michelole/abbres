@@ -24,7 +24,7 @@ public class Abbreviation implements Cloneable {
 	private String expansion;
 
 	public Abbreviation(String token) {
-		this.token = token;
+		this.token = TextUtils.standardize(token);
 		this.leftContext = new LeftContext("");
 		this.rightContext = new RightContext("");
 	}
@@ -50,7 +50,7 @@ public class Abbreviation implements Cloneable {
 	}
 
 	public Abbreviation withExpansion(String expansion) {
-		this.expansion = expansion;
+		this.expansion = TextUtils.standardize(expansion);
 		return this;
 	}
 
